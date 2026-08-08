@@ -211,6 +211,11 @@ for (const [i, rec] of films.entries()) {
   if (pin && pin.source === 'tmdb' && Number.isInteger(pin.id)) {
     try {
       applyTmdb(rec, await tmdbDetail(pin.id))
+      // 표시용 개봉연도를 바로잡는다. 원본은 released_notion_original에 그대로 남는다.
+      if (typeof pin.released === 'string') {
+        rec.released = pin.released
+        rec.source.released = 'human-override'
+      }
       rec.match_source = 'human-override'
       rec.match_confirmed = pin.confirmed !== false
       pinned++

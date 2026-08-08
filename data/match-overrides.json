@@ -1,96 +1,137 @@
 {
   "_comment": "자동 매칭이 못 찾거나 잘못 붙인 건을 사람이 직접 지정한다. movies.json의 id를 키로 쓰고 TMDB id를 적으면 enrich.mjs가 검색을 건너뛰고 그대로 쓴다. 원본 제목의 오타는 고치지 않고 그대로 두며 여기서 짝만 바로잡는다.",
-  "_how": "TMDB id는 themoviedb.org 주소의 /movie/<숫자>에 있다. 아래 항목은 모두 실제 조회로 확인했다. confirmed가 false인 것은 추론이므로 기록자의 확인이 필요하다.",
-
+  "_how": "TMDB id는 themoviedb.org 주소의 /movie/<숫자>에 있다. 아래 항목은 모두 실제 조회로 확인했다. released를 함께 적으면 표시용 개봉연도를 그 값으로 바로잡는다. 원본 연도는 released_notion_original에 그대로 남고, 주소(id)는 원본 연도로 만들어졌으므로 바뀌지 않는다.",
   "dejavu-2006": {
-    "source": "tmdb", "id": 7551, "confirmed": true,
+    "source": "tmdb",
+    "id": 7551,
+    "confirmed": true,
     "note": "자동 매칭이 스페인 영화 Dejavú(2005, TMDB 평가 0건, 포스터 없음)에 잘못 붙였다. 실제는 토니 스콧 감독 Déjà Vu(2006). 평가 5383건."
   },
-
   "predetor-1987": {
-    "source": "tmdb", "id": 106, "confirmed": true,
+    "source": "tmdb",
+    "id": 106,
+    "confirmed": true,
     "note": "PREDETOR는 PREDATOR의 오타. Predator(1987)."
   },
   "2001-a-space-odysey-1968": {
-    "source": "tmdb", "id": 62, "confirmed": true,
+    "source": "tmdb",
+    "id": 62,
+    "confirmed": true,
     "note": "ODYSEY는 ODYSSEY의 오타. 2001: A Space Odyssey(1968)."
   },
   "the-time-travelers-whife-2009": {
-    "source": "tmdb", "id": 24420, "confirmed": true,
+    "source": "tmdb",
+    "id": 24420,
+    "confirmed": true,
     "note": "WHIFE는 WIFE의 오타. The Time Traveler's Wife(2009)."
   },
   "sportlight-2015": {
-    "source": "tmdb", "id": 314365, "confirmed": true,
+    "source": "tmdb",
+    "id": 314365,
+    "confirmed": true,
     "note": "SPORTLIGHT는 SPOTLIGHT의 오타. Spotlight(2015)."
   },
   "forest-gump-1994": {
-    "source": "tmdb", "id": 13, "confirmed": true,
+    "source": "tmdb",
+    "id": 13,
+    "confirmed": true,
     "note": "FOREST는 FORREST의 오타. Forrest Gump(1994)."
   },
   "everything-everyone-all-at-once-2022": {
-    "source": "tmdb", "id": 545611, "confirmed": true,
+    "source": "tmdb",
+    "id": 545611,
+    "confirmed": true,
     "note": "EVERYONE은 EVERYWHERE의 오기. Everything Everywhere All at Once(2022)."
   },
   "the-school-of-good-and-evil-2022": {
-    "source": "tmdb", "id": 779782, "confirmed": true,
+    "source": "tmdb",
+    "id": 779782,
+    "confirmed": true,
     "note": "정식 제목은 The School for Good and Evil(2022). of가 아니라 for."
   },
-
   "army-of-dead-2021": {
-    "source": "tmdb", "id": 503736, "confirmed": true,
+    "source": "tmdb",
+    "id": 503736,
+    "confirmed": true,
     "note": "정식 제목 Army of the Dead(2021)."
   },
   "the-mummy-return-2001": {
-    "source": "tmdb", "id": 1734, "confirmed": true,
+    "source": "tmdb",
+    "id": 1734,
+    "confirmed": true,
     "note": "정식 제목 The Mummy Returns(2001)."
   },
   "inglorious-basterds-2009": {
-    "source": "tmdb", "id": 16869, "confirmed": true,
+    "source": "tmdb",
+    "id": 16869,
+    "confirmed": true,
     "note": "정식 철자 Inglourious Basterds(2009)."
   },
   "maze-runner-death-cure-2018": {
-    "source": "tmdb", "id": 336843, "confirmed": true,
+    "source": "tmdb",
+    "id": 336843,
+    "confirmed": true,
     "note": "정식 제목 Maze Runner: The Death Cure(2018)."
   },
   "wonderwoman-2017": {
-    "source": "tmdb", "id": 297762, "confirmed": true,
+    "source": "tmdb",
+    "id": 297762,
+    "confirmed": true,
     "note": "붙여쓴 제목이라 1976년 TV 시리즈에 걸렸다. Wonder Woman(2017)."
   },
   "tik-tik-boom-2021": {
-    "source": "tmdb", "id": 537116, "confirmed": true,
+    "source": "tmdb",
+    "id": 537116,
+    "confirmed": true,
     "note": "정식 제목 tick, tick... BOOM!(2021)."
   },
   "man-in-black-3-2012": {
-    "source": "tmdb", "id": 41154, "confirmed": true,
+    "source": "tmdb",
+    "id": 41154,
+    "confirmed": true,
     "note": "MAN이 아니라 MEN. Men in Black 3(2012)."
   },
   "the-fifth-wave-2016": {
-    "source": "tmdb", "id": 299687, "confirmed": true,
+    "source": "tmdb",
+    "id": 299687,
+    "confirmed": true,
     "note": "정식 제목 The 5th Wave(2016)."
   },
   "설국열차-snowpiercer-2013": {
-    "source": "tmdb", "id": 110415, "confirmed": true,
+    "source": "tmdb",
+    "id": 110415,
+    "confirmed": true,
     "note": "제목에 한국어와 영어가 함께 있어 매칭이 어긋났다. 설국열차(2013)."
   },
   "windy-city-heat-windy-city-heat-2003": {
-    "source": "tmdb", "id": 47126, "confirmed": true,
+    "source": "tmdb",
+    "id": 47126,
+    "confirmed": true,
     "note": "제목이 두 번 겹쳐 적혀 있었다. Windy City Heat(2003)."
   },
   "ring-1998": {
-    "source": "tmdb", "id": 2671, "confirmed": true,
+    "source": "tmdb",
+    "id": 2671,
+    "confirmed": true,
     "note": "짧은 제목이라 반지의 제왕이 먼저 걸렸다. 나카타 히데오 감독 リング(1998)."
   },
   "shutter-2004": {
-    "source": "tmdb", "id": 17111, "confirmed": true,
+    "source": "tmdb",
+    "id": 17111,
+    "confirmed": true,
     "note": "셔터 아일랜드가 먼저 걸렸다. 태국 영화 ชัตเตอร์ กดติดวิญญาณ(2004)."
   },
-
   "justice-league-2019": {
-    "source": "tmdb", "id": 141052, "confirmed": false,
-    "note": "저스티스 리그는 2017년작인데 기록의 개봉연도가 2019로 적혀 있다. 2017년 극장판(141052)으로 지정했으나, 2021년 잭 스나이더판(791373)을 보신 것이라면 바꿔야 한다. 확인 필요."
+    "source": "tmdb",
+    "id": 141052,
+    "released": "2017",
+    "confirmed": true,
+    "note": "기록에 2019로 적혀 있었으나 저스티스 리그 극장판은 2017년작이다. 2026-08-08 기록자 확인. 표시 연도를 2017로 바로잡는다. 원본 2019는 released_notion_original에 남는다."
   },
   "審死官續集-濟公-1993": {
-    "source": "tmdb", "id": 75197, "confirmed": false,
-    "note": "TMDB에 審死官續集이라는 제목은 없다. 濟公(The Mad Monk, 1993, 평가 67건)으로 지정했다. 근거는 세 가지. 연도가 1993으로 같고, 기록자 메모에 'It was good to see young Anthony Wong'이 있는데 이 배우가 그 영화에 나오며, 첫 대사 '参见玉帝!'가 옥황상제 앞 장면으로 시작하는 이 영화 도입부와 맞는다. 추론이므로 확인 필요."
+    "source": "tmdb",
+    "id": 75197,
+    "confirmed": true,
+    "note": "TMDB에 審死官續集이라는 제목은 없어 濟公(The Mad Monk, 1993)으로 지정. 지정 후 확인한 근거가 더 분명하다. TMDB의 한국어 제목이 \"심사관 2\"로 원본 제목 審死官續集(심사관 속편)과 맞고, 감독이 두기봉(杜琪峰)이며, 개봉일 1993-07-29로 연도가 같다. 기록자 메모의 young Anthony Wong과 첫 대사 参见玉帝!도 이 영화와 맞는다. 2026-08-08 기록자 확인."
   }
 }
