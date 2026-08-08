@@ -64,7 +64,8 @@ export async function kmdbSearch(query, listCount = 5) {
   const key = process.env.API_KMDB
   if (!key) return { results: [], note: 'API_KMDB 환경변수가 없어 KMDb를 건너뛰었습니다.' }
 
-  const url = new URL('http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp')
+  // HTTPS로 부른다. 키가 쿼리스트링에 실리므로 평문 구간을 만들지 않는다.
+  const url = new URL('https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp')
   url.searchParams.set('collection', 'kmdb_new2')
   url.searchParams.set('ServiceKey', key)
   url.searchParams.set('title', query)

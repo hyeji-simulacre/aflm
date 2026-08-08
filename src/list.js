@@ -8,7 +8,12 @@
 
   var grid = document.getElementById('grid')
   var more = document.getElementById('more')
+  var status = document.getElementById('list-status')
   if (!grid) return
+
+  function announce(text) {
+    if (status) status.textContent = text
+  }
 
   var seed = Number(grid.dataset.seed || 0)
   var filter = grid.dataset.groupFilter || ''
@@ -65,8 +70,10 @@
     if (left > 0) {
       more.hidden = false
       more.innerHTML = '더 보기<span class="n">' + left + '</span>'
-    } else if (more) {
-      more.remove()
+      announce(next.length + '편을 더 불러왔습니다. ' + shown + '편 표시 중, ' + left + '편 남았습니다.')
+    } else {
+      announce(next.length + '편을 더 불러왔습니다. ' + shown + '편 전부를 표시했습니다.')
+      if (more) more.remove()
     }
   }
 
@@ -91,6 +98,7 @@
     })
     .catch(function () {
       // 데이터를 못 받으면 미리 그려 둔 카드만 남는다. 화면을 망가뜨리지 않는다.
+      announce('목록을 더 불러오지 못했습니다.')
       if (more) {
         more.hidden = false
         more.disabled = true
