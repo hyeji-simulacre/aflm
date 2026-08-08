@@ -541,16 +541,29 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   font-variant-numeric: tabular-nums;
 }
 
-.pager a, .pager span {
-  padding: 16px 18px;
+.pager button, .pager span {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  padding: 20px var(--pad);
+  border: 0;
   border-right: 1px solid var(--grey1);
+  background: transparent;
   color: var(--grey3);
+  text-align: left;
 }
 
-.pager a:first-child, .pager span:first-child { padding-left: var(--pad); }
-.pager a:hover { color: var(--ink); background: var(--lime); }
-.pager span[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--ink); }
-.pager .step { color: var(--ink); }
+.pager button {
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 300ms cubic-bezier(.19, 1, .22, 1);
+}
+
+.pager button:hover:not(:disabled) { background: var(--lime); }
+.pager button:disabled { color: var(--grey2); cursor: default; }
+.pager button[hidden] { display: none; }
+.pager .n { margin-left: 10px; color: var(--grey3); font-variant-numeric: tabular-nums; }
+.pager button:hover .n { color: var(--ink); }
 
 /* ── 꼬리말 ──────────────────────────────────────────────────────────── */
 .foot {

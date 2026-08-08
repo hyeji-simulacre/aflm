@@ -216,42 +216,26 @@ ${cap}
 </a>`
 }
 
-const PER_PAGE = 24   // 4열 6행. 3열·2열에서도 나누어떨어진다
-
-/** 페이지 이동줄. 한 페이지뿐이면 만들지 않는다. */
-function pagerNav(current, total, hrefFor) {
-  if (total <= 1) return ''
-  const items = []
-  if (current > 1) items.push(`<a class="step" href="${hrefFor(current - 1)}" rel="prev">이전</a>`)
-  for (let i = 1; i <= total; i++) {
-    items.push(i === current
-      ? `<span aria-current="page">${i}</span>`
-      : `<a href="${hrefFor(i)}">${i}</a>`)
-  }
-  if (current < total) items.push(`<a class="step" href="${hrefFor(current + 1)}" rel="next">다음</a>`)
-  return `<nav class="pager" aria-label="페이지">${items.join('')}</nav>`
-}
+const SEED = 24   // 화면에 미리 그려 두는 카드 수. 나머지는 데이터에서 받아 그린다
 
 /**
- * 목록을 PER_PAGE씩 나눠 여러 파일로 쓴다.
- * hrefFor(n)은 같은 목록의 n페이지로 가는, 그 페이지 위치 기준 상대 주소.
+ * 목록 화면. 데이터는 HTML에 담지 않는다.
+ * 처음 SEED장만 미리 그려 두고(JavaScript가 없거나 아직 안 왔을 때를 위해),
+ * 나머지는 data/movies.json을 받아 같은 모양으로 이어 그린다.
  */
-function writeListPages({ items, title, lead, current, depth = 0, desc, fileFor, hrefFor }) {
-  const total = Math.max(1, Math.ceil(items.length / PER_PAGE))
-  for (let n = 1; n <= total; n++) {
-    const slice = items.slice((n - 1) * PER_PAGE, n * PER_PAGE)
-    const body = `${hero(depth, n === 1 ? lead : `${lead} ${n}/${total}페이지.`)}
+function listPage({ items, title, lead, current, depth = 0, desc, group = null }) {
+  const seed = items.slice(0, SEED)
+  const body = `${hero(depth, lead)}
 ${groupbar(depth, current)}
-<main class="grid">
-${slice.map(m => card(m, depth)).join('\n')}
+<main class="grid" id="grid" data-group-filter="${group ?? ''}" data-seed="${seed.length}" data-total="${items.length}">
+${seed.map(m => card(m, depth)).join('\n')}
 </main>
-${pagerNav(n, total, hrefFor)}`
-    writeFileSync(fileFor(n), page({
-      title: n === 1 ? title : `${title} — ${n}페이지`,
-      desc, body, depth,
-    }), 'utf8')
-  }
-  return total
+${items.length > SEED ? `<nav class="pager">
+<button type="button" id="more" hidden>더 보기<span class="n">${items.length - SEED}</span></button>
+<noscript><span>여기까지 ${SEED}편입니다. 나머지 ${items.length - SEED}편은 분류별 목록에서 볼 수 있습니다.</span></noscript>
+</nav>` : ''}
+<script src="${up(depth)}list.js" defer></script>`
+  return page({ title, desc, body, depth })
 }
 
 // ── 상세 ────────────────────────────────────────────────────────────────────
@@ -381,6 +365,25 @@ copyFileSync(join(root, 'src', 'favicon.svg'), join(OUT, 'favicon.svg'))
 writeFileSync(join(OUT, '.nojekyll'), '', 'utf8')
 copyFileSync(join(root, 'data', 'style-groups.json'), join(OUT, 'style-groups.json'))
 copyFileSync(join(root, 'data', 'venues.json'), join(OUT, 'venues.json'))
+copyFileSync(join(root, 'src', 'list.js'), join(OUT, 'list.js'))
+
+// 화면이 받아 쓸 데이터. 보여주는 데 필요한 값만 담는다.
+// 원본 보존 필드와 출처 표시는 저장소의 movies.json에만 둔다.
+mkdirSync(join(OUT, 'data'), { recursive: true })
+writeFileSync(join(OUT, 'data', 'movies.json'), JSON.stringify({
+  count: movies.length,
+  fields: ['id', 'line', 'title', 'year', 'style', 'group', 'poster', 'edition'],
+  items: movies.map(m => ({
+    id: m.id,
+    line: m.first_line,
+    title: m.title || '제목 없음',
+    year: m.released,
+    style: m.style,
+    group: groupOf(m).key,
+    poster: m.poster_url,
+    edition: m.edition ?? null,
+  })),
+}), 'utf8')
 // admin.html은 배포본에 넣지 않는다. 입력은 로컬 admin-server에서만 한다.
 
 // Notion에 딸려 있던 포스터
@@ -394,31 +397,28 @@ if (existsSync(posterDir)) {
   }
 }
 
-const allPages = writeListPages({
+writeFileSync(join(OUT, 'index.html'), listPage({
   items: movies,
   title: `${SITE} (${ABBR})`,
   lead: '영화를 볼 때마다 맨 앞으로 돌려 첫 대사를 적었습니다. 2021년부터 모은 기록입니다.',
   current: 'all',
   desc: '2021년부터 모은 영화 첫 대사 아카이브',
-  fileFor: n => join(OUT, n === 1 ? 'index.html' : `list-${n}.html`),
-  hrefFor: n => n === 1 ? 'index.html' : `list-${n}.html`,
-})
+}), 'utf8')
 
 const allGroups = [...GROUPS, UNASSIGNED]
 let groupPages = 0
 for (const g of allGroups) {
   const items = movies.filter(m => groupOf(m).key === g.key)
   if (items.length === 0) continue
-  writeListPages({
+  writeFileSync(join(OUT, 'group', `${g.key}.html`), listPage({
     items,
     title: `${g.name} — ${ABBR}`,
     lead: `${g.definition} ${items.length}편.`,
     current: g.key,
     depth: 1,
     desc: g.definition,
-    fileFor: n => join(OUT, 'group', n === 1 ? `${g.key}.html` : `${g.key}-${n}.html`),
-    hrefFor: n => n === 1 ? `${g.key}.html` : `${g.key}-${n}.html`,
-  })
+    group: g.key,
+  }), 'utf8')
   groupPages++
 }
 
@@ -435,5 +435,5 @@ for (const m of movies) {
 }
 
 const withPoster = movies.filter(m => m.poster_url).length
-console.log(`목록 ${allPages}쪽, 분류별 ${groupPages}군, 분류 색인 1, 문서 ${docs.length}, 상세 ${movies.length} 생성 완료.`)
+console.log(`목록 1, 분류별 ${groupPages}, 분류 색인 1, 문서 ${docs.length}, 상세 ${movies.length} 생성 완료.`)
 console.log(`포스터 ${withPoster}/${movies.length}편, 기록자 메모 ${movies.filter(m => m.note).length}건, 글꼴 조각 ${fontCount}개.`)

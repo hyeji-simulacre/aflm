@@ -66,6 +66,7 @@ data/
 assets/posters/                Notion에 함께 있던 포스터
 src/
   style.css                    손으로 쓴 CSS
+  list.js                      목록이 데이터를 받아 카드를 이어 그림
   colophon.md                  소개 페이지에 붙는 제작 기록
   fonts/                       Pretendard, Outfit (자체 보관)
   favicon.svg
@@ -77,7 +78,7 @@ scripts/
   fetch-fonts.mjs              글꼴 내려받기 (한 번만)
   admin-server.mjs             입력 도구 서버 (로컬 전용)
   serve.mjs                    열람 확인용 서버
-build.mjs                      movies.json → 정적 HTML
+build.mjs                      movies.json → 정적 HTML + public/data/movies.json
 admin.html                     입력 화면 (배포 제외)
 ```
 
