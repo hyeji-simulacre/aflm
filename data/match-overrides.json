@@ -1,6 +1,6 @@
 {
   "_comment": "자동 매칭이 못 찾거나 잘못 붙인 건을 사람이 직접 지정한다. movies.json의 id를 키로 쓰고 TMDB id를 적으면 enrich.mjs가 검색을 건너뛰고 그대로 쓴다. 원본 제목의 오타는 고치지 않고 그대로 두며 여기서 짝만 바로잡는다.",
-  "_how": "TMDB id는 themoviedb.org 주소의 /movie/<숫자>에 있다. 아래 항목은 모두 실제 조회로 확인했다. released를 함께 적으면 표시용 개봉연도를 그 값으로 바로잡는다. 원본 연도는 released_notion_original에 그대로 남고, 주소(id)는 원본 연도로 만들어졌으므로 바뀌지 않는다.",
+  "_how": "TMDB id는 themoviedb.org 주소의 /movie/<숫자>에 있다. 아래 항목은 모두 실제 조회로 확인했다. title, released, edition을 함께 적으면 표시용 값을 그것으로 바로잡는다. Notion 원본은 title_notion_original, released_notion_original에 그대로 남는다. title을 적으면 주소(id)도 그 제목으로 다시 만들어진다.",
   "dejavu-2006": {
     "source": "tmdb",
     "id": 7551,
@@ -133,5 +133,23 @@
     "id": 75197,
     "confirmed": true,
     "note": "TMDB에 審死官續集이라는 제목은 없어 濟公(The Mad Monk, 1993)으로 지정. 지정 후 확인한 근거가 더 분명하다. TMDB의 한국어 제목이 \"심사관 2\"로 원본 제목 審死官續集(심사관 속편)과 맞고, 감독이 두기봉(杜琪峰)이며, 개봉일 1993-07-29로 연도가 같다. 기록자 메모의 young Anthony Wong과 첫 대사 参见玉帝!도 이 영화와 맞는다. 2026-08-08 기록자 확인."
+  },
+  "untitled-row-146": {
+    "source": "tmdb",
+    "id": 49051,
+    "title": "THE HOBBIT: AN UNEXPECTED JOURNEY",
+    "released": "2012",
+    "confirmed": true,
+    "note": "Notion 원본에 제목·장르·연도가 모두 비어 있고 첫 대사 'My dear Frodo.'만 있었다. 빌보가 프로도에게 쓰는 이 문장이 호빗 1편 도입부다. 2026-08-08 기록자 확인(호빗 1편). 원본의 빈 제목은 title_notion_original에 남는다."
+  },
+  "the-lord-of-the-rings-the-fellowship-of-the-ring-2001": {
+    "edition": "확장판",
+    "confirmed": true,
+    "note": "반지의 제왕은 모두 확장판으로 보셨다. 2026-08-08 기록자 확인. TMDB에 확장판이 별도 항목으로 없어 판본만 표시한다."
+  },
+  "the-lord-of-the-rings-the-two-towers-2002": {
+    "edition": "확장판",
+    "confirmed": true,
+    "note": "반지의 제왕은 모두 확장판으로 보셨다. 2026-08-08 기록자 확인. TMDB에 확장판이 별도 항목으로 없어 판본만 표시한다."
   }
 }

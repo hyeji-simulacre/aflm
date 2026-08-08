@@ -138,6 +138,11 @@ function findNotionPoster(title) {
 }
 
 // ── 실행 ────────────────────────────────────────────────────────────────────
+// 사람이 직접 바로잡은 값. 제목이 여기 있으면 주소도 그 제목으로 만든다.
+const OVERRIDES = existsSync(join(root, 'data', 'match-overrides.json'))
+  ? JSON.parse(readFileSync(join(root, 'data', 'match-overrides.json'), 'utf8'))
+  : {}
+
 const rows = parseCsv(readFileSync(CSV, 'utf8'))
 const groupsFile = JSON.parse(readFileSync(GROUPS, 'utf8'))
 
@@ -212,7 +217,13 @@ for (const [i, r] of rows.entries()) {
     report.created_at_unparsed.push({ row: i + 2, title, value: createdRaw })
   }
 
-  let slug = makeSlug(title, year)
+  // 원본 값으로 임시 주소를 만든 뒤, 사람이 바로잡은 제목이 있으면 그것을 쓴다
+  const provisional = makeSlug(title, year) || `untitled-row-${i + 2}`
+  const fix = OVERRIDES[provisional] ?? {}
+  const finalTitle = typeof fix.title === 'string' ? fix.title : title
+  const finalYear = typeof fix.released === 'string' ? fix.released : year
+
+  let slug = makeSlug(finalTitle, finalYear)
   if (slug === '') {
     // 제목이 비어 있어 주소를 만들 수 없다. 원본 행 번호로 임시 주소를 준다.
     // 사람이 제목을 채우면 주소도 제목을 따르게 다시 만든다.
@@ -255,7 +266,9 @@ for (const [i, r] of rows.entries()) {
     id: slug,
     record_kind: kind,
     note,
-    title,
+    watched_via: null,
+    edition: typeof fix.edition === 'string' ? fix.edition : null,
+    title: finalTitle,
     title_notion_original: titleRaw,
     title_original: null,
     title_ko: null,
@@ -266,7 +279,7 @@ for (const [i, r] of rows.entries()) {
     genre,
     genre_notion_original: genreRaw,
     tags,
-    released: year,
+    released: finalYear,
     released_notion_original: releasedRaw,
     release_date: null,
     director: null,
@@ -280,8 +293,8 @@ for (const [i, r] of rows.entries()) {
       first_line: 'human',
       style: 'human',
       genre: 'notion-original',
-      released: 'notion-original',
-      title: 'notion-original',
+      released: fix.released ? 'human-override' : 'notion-original',
+      title: fix.title ? 'human-override' : 'notion-original',
       note: note ? 'notion-original' : null,
       poster_url: posterSource,
     },

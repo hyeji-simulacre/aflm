@@ -68,13 +68,7 @@
     }
   ],
   "slug_collision": [],
-  "empty_slug": [
-    {
-      "row": 146,
-      "first_line": "My dear Frodo.",
-      "assigned": "untitled-row-146"
-    }
-  ],
+  "empty_slug": [],
   "not_a_movie_suspect": [],
   "poster_from_notion": [
     {
