@@ -1,0 +1,68 @@
+{
+  "_comment": "Style 20종을 상위 6군으로 묶고 각 군에 그린 6색을 배정한다. 군 이름과 배정은 정혜지님이 언제든 이 파일에서 바꿀 수 있다. 이 파일이 색과 분류의 단일 원본이다.",
+  "_source": "Notion DB 'ARCHIVE of THE FIRST LINE OF MOVIES' 165편 실측 (2026-08-08)",
+  "_why": "6군으로 묶은 근거는 기록자 본인이 2025-05-17 '첫 대사 원칙' 문서 주석 1항에 적어둔 다음 문장이다. '대사 스타일은 아카이빙 작업 초기에는 포괄적이었으나, 시청하는 영화가 많아질수록 세부적인 스타일이 추가되었으며, 단순 태그를 넘어서 스타일 값의 계층성을 부여하여야겠다는 생각이 듦'. 이 묶음은 그 생각의 실행이다. 원칙 문서는 사이트의 page/principles.html에 그대로 싣는다.",
+  "groups": [
+    {
+      "key": "dialogue",
+      "name": "대화",
+      "definition": "두 사람 이상이 말을 주고받으며 영화가 시작한다.",
+      "color": "olive",
+      "hex": "#4F6B2B",
+      "styles": ["일상대화형", "인터뷰형", "전화통화형", "엄빠형", "회의형", "취조형"]
+    },
+    {
+      "key": "monologue",
+      "name": "독백",
+      "definition": "한 사람이 혼자 말하거나 마음속으로 말하며 시작한다.",
+      "color": "hunter",
+      "hex": "#2E5734",
+      "styles": ["독백형", "편지형", "기도형"]
+    },
+    {
+      "key": "exposition",
+      "name": "설명",
+      "definition": "관객에게 세계나 상황을 먼저 설명하며 시작한다.",
+      "color": "sage",
+      "hex": "#8DA288",
+      "styles": ["배경설명형", "나레이션형", "프레젠테이션/강의형"]
+    },
+    {
+      "key": "declaration",
+      "name": "선언",
+      "definition": "화자가 자신이 누구인지 밝히거나 상대에게 지시하며 시작한다.",
+      "color": "forest",
+      "hex": "#1D9247",
+      "styles": ["자기소개형", "명령형"]
+    },
+    {
+      "key": "transmission",
+      "name": "매체",
+      "definition": "방송이나 통신 장비를 거쳐 전달된 말로 시작한다.",
+      "color": "moss",
+      "hex": "#8DAF59",
+      "styles": ["방송자료형", "무전통신형"]
+    },
+    {
+      "key": "text",
+      "name": "문자",
+      "definition": "소리가 아니라 화면에 뜬 글자로 시작한다.",
+      "color": "khaki",
+      "hex": "#C8C464",
+      "styles": ["자막설명형", "제1장형", "관련자료형"]
+    }
+  ],
+  "unassigned": {
+    "key": "unassigned",
+    "name": "미분류",
+    "definition": "Notion 원본에 Style 값이 비어 있는 기록. 사람이 분류를 지정하면 해당 군으로 옮긴다.",
+    "color": "neutral",
+    "hex": "#9A9A93"
+  },
+  "genre_to_tag": {
+    "_comment": "장르 칸에 섞여 있던 비장르 값. genre에서 떼어 tags로 옮긴다. genre_notion_original에 원본 문자열을 그대로 남기므로 되돌릴 수 있다.",
+    "Based on real life": "실화 기반",
+    "Based on books": "원작 도서",
+    "Marvel": "마블"
+  }
+}

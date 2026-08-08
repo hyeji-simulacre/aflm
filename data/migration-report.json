@@ -1,0 +1,260 @@
+{
+  "generated_at_note": "이 파일은 사람이 확인해야 할 건만 모은 것이다.",
+  "total": 165,
+  "style_missing": [
+    {
+      "row": 80,
+      "title": "If you want to know what’s going on 🥸",
+      "first_line": "소개글이랍니다."
+    },
+    {
+      "row": 123,
+      "title": "THE ROAD TO EL DORADO",
+      "first_line": ""
+    },
+    {
+      "row": 146,
+      "title": "",
+      "first_line": "My dear Frodo."
+    },
+    {
+      "row": 160,
+      "title": "Principal",
+      "first_line": ""
+    }
+  ],
+  "style_unmapped": [],
+  "first_line_missing": [
+    {
+      "row": 123,
+      "title": "THE ROAD TO EL DORADO"
+    },
+    {
+      "row": 160,
+      "title": "Principal"
+    }
+  ],
+  "released_unparsed": [
+    {
+      "row": 80,
+      "title": "If you want to know what’s going on 🥸",
+      "value": "July 31, 2021",
+      "extracted": "2021",
+      "reason": "연도 외 문자가 섞임"
+    },
+    {
+      "row": 146,
+      "title": "",
+      "value": "(빈값)",
+      "reason": "값 없음"
+    }
+  ],
+  "created_at_unparsed": [],
+  "title_trimmed": [
+    {
+      "row": 3,
+      "before": "JUPITER ASCENDING ",
+      "after": "JUPITER ASCENDING"
+    },
+    {
+      "row": 120,
+      "before": "BELFAST ",
+      "after": "BELFAST"
+    },
+    {
+      "row": 127,
+      "before": "JUSTICE LEAGUE ",
+      "after": "JUSTICE LEAGUE"
+    }
+  ],
+  "slug_collision": [],
+  "empty_slug": [
+    {
+      "row": 146,
+      "first_line": "My dear Frodo.",
+      "assigned": "untitled-row-146"
+    }
+  ],
+  "not_a_movie_suspect": [],
+  "poster_from_notion": [
+    {
+      "row": 84,
+      "title": "SUNSHINE",
+      "file": "sunshine-2007.jpeg"
+    },
+    {
+      "row": 86,
+      "title": "TRAINING DAY",
+      "file": "training-day-2001.jpeg"
+    }
+  ],
+  "note_carried": [
+    {
+      "row": 14,
+      "title": "ASSASSIN'S CREED",
+      "chars": 59
+    },
+    {
+      "row": 35,
+      "title": "花樣年華",
+      "chars": 62
+    },
+    {
+      "row": 36,
+      "title": "重慶森林",
+      "chars": 41
+    },
+    {
+      "row": 40,
+      "title": "甜蜜蜜",
+      "chars": 29
+    },
+    {
+      "row": 46,
+      "title": "2001 A SPACE ODYSEY",
+      "chars": 104
+    },
+    {
+      "row": 49,
+      "title": "HACKSAW RIDGE",
+      "chars": 21
+    },
+    {
+      "row": 51,
+      "title": "PORTRAIT DE LA JEUNE FILLE EN FEU",
+      "chars": 56
+    },
+    {
+      "row": 52,
+      "title": "MONTY PYTHON AND THE HOLY GRAIL",
+      "chars": 83
+    },
+    {
+      "row": 53,
+      "title": "BAD TRIP",
+      "chars": 43
+    },
+    {
+      "row": 55,
+      "title": "VAN HELSING",
+      "chars": 31
+    },
+    {
+      "row": 61,
+      "title": "LOVING VINCENT",
+      "chars": 89
+    },
+    {
+      "row": 62,
+      "title": "아가씨",
+      "chars": 14
+    },
+    {
+      "row": 64,
+      "title": "BABY DRIVER",
+      "chars": 85
+    },
+    {
+      "row": 73,
+      "title": "2046",
+      "chars": 28
+    },
+    {
+      "row": 74,
+      "title": "THE TIME MACHINE",
+      "chars": 96
+    },
+    {
+      "row": 76,
+      "title": "남한산성",
+      "chars": 3
+    },
+    {
+      "row": 80,
+      "title": "If you want to know what’s going on 🥸",
+      "chars": 5210
+    },
+    {
+      "row": 90,
+      "title": "SHUTTER",
+      "chars": 7
+    },
+    {
+      "row": 102,
+      "title": "MIRACOL",
+      "chars": 10
+    },
+    {
+      "row": 124,
+      "title": "審死官續集 - 濟公",
+      "chars": 52
+    },
+    {
+      "row": 128,
+      "title": "THE MEG",
+      "chars": 18
+    },
+    {
+      "row": 129,
+      "title": "CHILDREN OF MEN",
+      "chars": 4
+    },
+    {
+      "row": 130,
+      "title": "RRR",
+      "chars": 7
+    },
+    {
+      "row": 131,
+      "title": "정이",
+      "chars": 10
+    },
+    {
+      "row": 132,
+      "title": "ENDER’S GAME",
+      "chars": 42
+    },
+    {
+      "row": 133,
+      "title": "INTOUCHABLES",
+      "chars": 5
+    },
+    {
+      "row": 142,
+      "title": "EVERYTHING EVERYONE ALL AT ONCE",
+      "chars": 24
+    },
+    {
+      "row": 149,
+      "title": "JAG ÄR INGRID",
+      "chars": 67
+    },
+    {
+      "row": 154,
+      "title": "A POSTCARD FROM PYONGYANG",
+      "chars": 19
+    },
+    {
+      "row": 160,
+      "title": "Principal",
+      "chars": 480
+    },
+    {
+      "row": 161,
+      "title": "지구를 지켜라!",
+      "chars": 16
+    }
+  ],
+  "pages": [
+    {
+      "row": 80,
+      "title": "If you want to know what’s going on 🥸",
+      "chars": 5210
+    },
+    {
+      "row": 160,
+      "title": "Principal",
+      "chars": 480
+    }
+  ]
+}

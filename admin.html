@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>기록 추가 — AFLM</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<style>
+/* 입력 도구에만 쓰는 규칙. 휴대폰 화면을 먼저 맞춘다. */
+.admin { max-width: 640px; margin: 0 auto; padding: 32px var(--pad) 120px; }
+.admin h1 { font-family: var(--serif); font-weight: 400; font-size: 28px; margin: 0 0 4px; }
+.admin .sub { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--mute); margin: 0 0 32px; }
+
+.field { margin-bottom: 22px; }
+.field > label { display: block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: 8px; }
+
+input[type=text], input[type=password], textarea, select {
+  width: 100%; font: inherit; font-size: 16px; /* 16px 미만이면 iOS가 확대한다 */
+  color: var(--ink); background: #fff;
+  border: 1px solid var(--line); border-radius: 0;
+  padding: 13px 14px; appearance: none;
+}
+textarea { font-family: var(--serif); font-size: 19px; line-height: 1.45; min-height: 116px; resize: vertical; }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--forest); outline-offset: -1px; border-color: transparent; }
+
+button {
+  font: inherit; font-size: 14px; letter-spacing: .06em;
+  padding: 14px 20px; border: 1px solid var(--ink); background: var(--ink); color: #fff;
+  border-radius: 0; cursor: pointer; width: 100%;
+}
+button.ghost { background: transparent; color: var(--ink); }
+button[disabled] { opacity: .4; cursor: default; }
+.row { display: flex; gap: 10px; }
+.row button { width: auto; flex: 1; }
+.row input { flex: 1; }
+
+.results { list-style: none; margin: 14px 0 0; padding: 0; }
+.results li { border-top: 1px solid var(--line); }
+.results button {
+  display: flex; gap: 14px; align-items: flex-start; text-align: left;
+  width: 100%; background: transparent; color: inherit; border: 0;
+  padding: 14px 0; letter-spacing: 0;
+}
+.results img, .results .noimg {
+  width: 46px; height: 69px; object-fit: cover; flex: none;
+  border: 1px solid var(--line); background: #fff;
+}
+.results .noimg { display: grid; place-items: center; font-size: 9px; color: var(--mute); }
+.results .t { font-size: 15px; line-height: 1.35; }
+.results .d { font-size: 11px; color: var(--mute); margin-top: 5px; letter-spacing: .04em; }
+.results .src { color: var(--forest); }
+
+.chosen { border: 1px solid var(--line); padding: 16px; display: flex; gap: 14px; background: #fff; }
+.chosen img, .chosen .noimg { width: 62px; height: 93px; object-fit: cover; flex: none; border: 1px solid var(--line); }
+.chosen .noimg { display: grid; place-items: center; font-size: 9px; color: var(--mute); }
+.chosen dl { margin: 0; font-size: 12px; line-height: 1.75; }
+.chosen dt { display: none; }
+.chosen dd { margin: 0; }
+.chosen .name { font-size: 15px; margin-bottom: 4px; }
+.chosen .unknown { color: var(--mute); font-style: italic; }
+
+.msg { padding: 13px 15px; font-size: 13px; line-height: 1.6; margin-bottom: 20px; border: 1px solid; }
+.msg.err { border-color: #B4483C; color: #8C3328; background: #FCF4F3; }
+.msg.ok { border-color: var(--forest); color: var(--hunter); background: #F3F9F5; }
+.msg.info { border-color: var(--line); color: var(--mute); background: #fff; }
+
+.hide { display: none; }
+.note { font-size: 11px; color: var(--mute); line-height: 1.7; margin-top: 8px; }
+optgroup { font-style: normal; }
+</style>
+</head>
+<body>
+<main class="admin">
+<h1>기록 추가</h1>
+<p class="sub">AFLM</p>
+
+<div id="msg"></div>
+
+<!-- 1. 암호 -->
+<section id="gate">
+  <div class="field">
+    <label for="pass">암호</label>
+    <input type="password" id="pass" autocomplete="current-password" enterkeyhint="go">
+  </div>
+  <button id="unlock">확인</button>
+</section>
+
+<!-- 2. 영화 찾기 -->
+<section id="app" class="hide">
+  <div class="field">
+    <label for="q">영화 제목</label>
+    <div class="row">
+      <input type="text" id="q" placeholder="한국어, 영어, 원어 모두 가능" enterkeyhint="search" autocomplete="off">
+      <button id="go" class="ghost" style="flex:0 0 76px">찾기</button>
+    </div>
+    <p class="note">TMDB와 KMDb에서 함께 찾습니다. 자동으로 고르지 않으니 목록에서 직접 선택하세요.</p>
+    <ul class="results" id="results"></ul>
+  </div>
+
+  <div class="field hide" id="chosenWrap">
+    <label>선택한 영화</label>
+    <div class="chosen" id="chosen"></div>
+    <p class="note"><button class="ghost" id="clear" style="width:auto;padding:8px 12px;font-size:12px;margin-top:10px">다시 고르기</button></p>
+  </div>
+
+  <!-- 3. 사람이 쓰는 두 가지 -->
+  <div class="field">
+    <label for="line">첫 대사</label>
+    <textarea id="line" placeholder="영화의 첫 대사를 그대로" enterkeyhint="done"></textarea>
+  </div>
+
+  <div class="field">
+    <label for="style">화법 분류</label>
+    <select id="style"><option value="">고르세요</option></select>
+  </div>
+
+  <div class="field">
+    <label for="venue">본 곳 (선택)</label>
+    <select id="venue"><option value="">고르지 않음</option></select>
+    <p class="note">시청일은 저장한 날짜로 자동 기록됩니다.</p>
+  </div>
+
+  <div class="field">
+    <label for="edition">판본 (선택)</label>
+    <select id="edition">
+      <option value="">기본판</option>
+      <option>확장판</option>
+      <option>감독판</option>
+      <option>무삭제판</option>
+      <option>리마스터판</option>
+      <option>재개봉판</option>
+    </select>
+  </div>
+
+  <button id="save" disabled>저장</button>
+  <p class="note">저장하면 로컬 데이터에 쓰고 빌드까지 합니다. git push 하면 사이트에 반영됩니다.</p>
+</section>
+</main>
+
+<script>
+(function () {
+  'use strict'
+
+  var KEY = 'aflm-key'
+  var $ = function (id) { return document.getElementById(id) }
+  var chosenMovie = null
+  var groups = null
+
+  function msg(text, kind) {
+    $('msg').innerHTML = text
+      ? '<div class="msg ' + (kind || 'info') + '">' + text + '</div>'
+      : ''
+  }
+
+  function key() { return sessionStorage.getItem(KEY) || '' }
+
+  function api(path, opts) {
+    opts = opts || {}
+    opts.headers = Object.assign({ 'x-aflm-key': key() }, opts.headers || {})
+    return fetch(path, opts).then(function (r) {
+      return r.json().then(function (b) {
+        if (!r.ok) throw new Error(b.error || ('오류 ' + r.status))
+        return b
+      })
+    })
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+  }
+
+  // ── 분류 목록 채우기 ────────────────────────────────────────────────
+  fetch('style-groups.json').then(function (r) { return r.json() }).then(function (g) {
+    groups = g
+    var sel = $('style')
+    g.groups.forEach(function (grp) {
+      var og = document.createElement('optgroup')
+      og.label = grp.name
+      grp.styles.forEach(function (s) {
+        var o = document.createElement('option')
+        o.value = s
+        o.textContent = s
+        o.dataset.group = grp.key
+        og.appendChild(o)
+      })
+      sel.appendChild(og)
+    })
+  }).catch(function () {
+    msg('분류 목록을 읽지 못했습니다. style-groups.json을 확인하세요.', 'err')
+  })
+
+  // ── 시청 경로 목록 채우기 ───────────────────────────────────────────
+  fetch('venues.json').then(function (r) { return r.json() }).then(function (v) {
+    var sel = $('venue')
+    v.kinds.forEach(function (k) {
+      var og = document.createElement('optgroup')
+      og.label = k.label
+      k.names.forEach(function (n) {
+        var o = document.createElement('option')
+        o.value = n
+        o.textContent = n
+        o.dataset.kind = k.key
+        og.appendChild(o)
+      })
+      sel.appendChild(og)
+    })
+  }).catch(function () { /* 목록이 없어도 저장은 된다 */ })
+
+  // ── 암호 ────────────────────────────────────────────────────────────
+  function unlock() {
+    var v = $('pass').value.trim()
+    if (!v) return
+    sessionStorage.setItem(KEY, v)
+    $('gate').classList.add('hide')
+    $('app').classList.remove('hide')
+    msg('')
+    $('q').focus()
+  }
+  $('unlock').addEventListener('click', unlock)
+  $('pass').addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock() })
+  if (key()) { $('gate').classList.add('hide'); $('app').classList.remove('hide') }
+
+  // ── 검색 ────────────────────────────────────────────────────────────
+  function search() {
+    var q = $('q').value.trim()
+    if (!q) return
+    msg('찾는 중', 'info')
+    $('results').innerHTML = ''
+    api('/api/search?q=' + encodeURIComponent(q)).then(function (d) {
+      if (d.notes && d.notes.length) msg(d.notes.map(esc).join('<br>'), 'info')
+      else msg('')
+      if (!d.results.length) { msg('결과가 없습니다. 다른 표기로 찾아보세요.', 'info'); return }
+      $('results').innerHTML = d.results.map(function (r, i) {
+        var img = r.poster
+          ? '<img src="' + esc(r.poster) + '" alt="" loading="lazy">'
+          : '<span class="noimg">없음</span>'
+        var bits = [r.year, r.title_original !== r.title ? r.title_original : null]
+          .filter(Boolean).map(esc).join(' · ')
+        return '<li><button type="button" data-i="' + i + '">' + img +
+          '<span><span class="t">' + esc(r.title || '(제목 없음)') + '</span>' +
+          '<span class="d">' + bits + ' <span class="src">' + esc(r.source) + '</span></span></span></button></li>'
+      }).join('')
+      $('results').querySelectorAll('button').forEach(function (b) {
+        b.addEventListener('click', function () { choose(d.results[+b.dataset.i]) })
+      })
+    }).catch(function (e) { msg(esc(e.message), 'err') })
+  }
+  $('go').addEventListener('click', search)
+  $('q').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); search() } })
+
+  // ── 선택 ────────────────────────────────────────────────────────────
+  function choose(r) {
+    msg('정보를 가져오는 중', 'info')
+    var done = function (meta) {
+      chosenMovie = meta
+      render(meta)
+      msg('')
+      $('line').focus()
+    }
+    if (r.source === 'tmdb') {
+      api('/api/detail?source=tmdb&id=' + encodeURIComponent(r.id))
+        .then(function (d) {
+          done({
+            title: d.title_original || d.title,
+            title_original: d.title_original, title_ko: d.title_ko, title_local: d.title_local,
+            year: d.year, release_date: d.release_date, genre: d.genre,
+            director: d.director, country: d.country, poster_url: d.poster_url,
+            tmdb_id: d.tmdb_id, kmdb_id: null, source: 'tmdb'
+          })
+        })
+        .catch(function (e) { msg(esc(e.message), 'err') })
+    } else {
+      done({
+        title: r.title_original || r.title,
+        title_original: r.title_original, title_ko: r.title, title_local: null,
+        year: r.year, release_date: r.release_date, genre: r.genre,
+        director: r.director, country: r.country, poster_url: r.poster,
+        tmdb_id: null, kmdb_id: r.id, source: 'kmdb'
+      })
+    }
+  }
+
+  function row(label, value) {
+    return value
+      ? '<dt>' + esc(label) + '</dt><dd>' + esc(Array.isArray(value) ? value.join(', ') : value) + '</dd>'
+      : '<dt>' + esc(label) + '</dt><dd class="unknown">' + esc(label) + ' 확인되지 않음</dd>'
+  }
+
+  function render(m) {
+    var img = m.poster_url
+      ? '<img src="' + esc(m.poster_url) + '" alt="">'
+      : '<span class="noimg">포스터<br>없음</span>'
+    $('chosen').innerHTML = img + '<dl>' +
+      '<dd class="name">' + esc(m.title) + '</dd>' +
+      (m.title_ko ? '<dd>' + esc(m.title_ko) + '</dd>' : '') +
+      row('개봉', m.year) + row('감독', m.director) + row('장르', m.genre) +
+      '</dl>'
+    $('chosenWrap').classList.remove('hide')
+    $('results').innerHTML = ''
+    check()
+  }
+
+  $('clear').addEventListener('click', function () {
+    chosenMovie = null
+    $('chosenWrap').classList.add('hide')
+    $('q').value = ''
+    $('q').focus()
+    check()
+  })
+
+  // ── 저장 ────────────────────────────────────────────────────────────
+  function check() {
+    $('save').disabled = !(chosenMovie && $('line').value.trim() && $('style').value)
+  }
+  $('line').addEventListener('input', check)
+  $('style').addEventListener('change', check)
+
+  $('save').addEventListener('click', function () {
+    if (!chosenMovie) return
+    var opt = $('style').selectedOptions[0]
+    $('save').disabled = true
+    msg('저장하는 중', 'info')
+    api('/api/save', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        title: chosenMovie.title,
+        first_line: $('line').value.trim(),
+        style: $('style').value,
+        style_group: opt ? opt.dataset.group : null,
+        watched_via: $('venue').value
+          ? { kind: $('venue').selectedOptions[0].dataset.kind || null, name: $('venue').value }
+          : null,
+        edition: $('edition').value || null,
+        meta: chosenMovie
+      })
+    }).then(function (d) {
+      msg('저장했습니다. 지금 ' + d.total + '편. ' + esc(d.note), 'ok')
+      chosenMovie = null
+      $('chosenWrap').classList.add('hide')
+      $('q').value = ''; $('line').value = ''; $('style').value = ''
+      check()
+    }).catch(function (e) {
+      msg(esc(e.message), 'err')
+      check()
+    })
+  })
+})()
+</script>
+</body>
+</html>

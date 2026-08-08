@@ -1,0 +1,15 @@
+{
+  "_comment": "영화가 아닌 기록의 주소와 이동줄 이름. Notion에서 Genre를 '깊이없는 영화광'으로 표시해 둔 행이 여기 해당한다. 키는 movies.json의 id다. 여기에 없는 page 기록은 id를 그대로 주소로 쓰고 이동줄에는 넣지 않는다.",
+  "if-you-want-to-know-whats-going-on-2021": {
+    "slug": "about",
+    "label": "소개",
+    "heading": "깊이없는 영화광의 첫 대사 아카이브",
+    "order": 1
+  },
+  "principal-2025": {
+    "slug": "principles",
+    "label": "원칙",
+    "heading": "첫 대사 기록 원칙",
+    "order": 2
+  }
+}

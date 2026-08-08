@@ -1,0 +1,16 @@
+{
+  "name": "aflm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Archives of the First Lines in Movies",
+  "scripts": {
+    "migrate": "node scripts/migrate.mjs",
+    "verify": "node scripts/verify-migration.mjs",
+    "build": "node build.mjs",
+    "serve": "node --run build && node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
