@@ -183,11 +183,12 @@ function topbar(depth) {
 </header>`
 }
 
-function hero(depth, lead) {
+function hero(depth, lead, leadEn) {
   return `<section class="hero">
 <h1><a href="${up(depth)}index.html">${ABBR}&copy;</a></h1>
 <span class="full">${esc(SITE)}</span>
 ${lead ? `<p class="lead">${esc(lead)}</p>` : ''}
+${leadEn ? `<p class="lead en" lang="en">${esc(leadEn)}</p>` : ''}
 </section>`
 }
 
@@ -281,9 +282,9 @@ const SEED = 24   // 화면에 미리 그려 두는 카드 수. 나머지는 데
  * 처음 SEED장만 미리 그려 두고(JavaScript가 없거나 아직 안 왔을 때를 위해),
  * 나머지는 data/movies.json을 받아 같은 모양으로 이어 그린다.
  */
-function listPage({ items, title, lead, current, depth = 0, desc, group = null }) {
+function listPage({ items, title, lead, leadEn, current, depth = 0, desc, group = null }) {
   const seed = items.slice(0, SEED)
-  const body = `${hero(depth, lead)}
+  const body = `${hero(depth, lead, leadEn)}
 ${groupbar(depth, current)}
 <main class="grid" id="grid" data-base="${up(depth)}" data-group-filter="${group ?? ''}" data-seed="${seed.length}" data-total="${items.length}">
 ${seed.map(m => card(m, depth)).join('\n')}
@@ -359,8 +360,9 @@ function stylesPage() {
   const sections = GROUPS.map(g => {
     const total = g.styles.reduce((n, s) => n + (perStyle.get(s) ?? 0), 0)
     return `<section class="groupsec" data-group="${g.key}">
-<h2><span class="swatch"></span>${esc(g.name)}<span class="n">${total}</span></h2>
+<h2><span class="swatch"></span>${esc(g.name)}<span class="en" lang="en">${esc(g.name_en ?? '')}</span><span class="n">${total}</span></h2>
 <p class="def">${esc(g.definition)}</p>
+${g.definition_en ? `<p class="def en" lang="en">${esc(g.definition_en)}</p>` : ''}
 <ul class="styles">
 ${g.styles.map(s => `<li>${esc(s)}<span class="n">${perStyle.get(s) ?? 0}</span></li>`).join('\n')}
 </ul>
@@ -372,7 +374,7 @@ ${g.styles.map(s => `<li>${esc(s)}<span class="n">${perStyle.get(s) ?? 0}</span>
     title: `분류 — ${ABBR}`,
     desc: '영화 첫 대사의 화법 분류 체계',
     depth: 0,
-    body: `${hero(0, `화법 분류 ${perStyle.size}종을 ${GROUPS.length}군으로 묶었습니다.`)}
+    body: `${hero(0, `화법 분류 ${perStyle.size}종을 ${GROUPS.length}군으로 묶었습니다.`, `${perStyle.size} speech styles grouped into ${GROUPS.length} families.`)}
 ${groupbar(0, 'styles')}
 <main class="groups">
 ${sections}
@@ -460,7 +462,8 @@ if (existsSync(posterDir)) {
 writeFileSync(join(OUT, 'index.html'), listPage({
   items: movies,
   title: `${SITE} (${ABBR})`,
-  lead: '영화를 볼 때마다 맨 앞으로 돌려 첫 대사를 적었습니다. 2021년부터 모은 기록입니다.',
+  lead: '영화의 줄거리를 잊지 않기 위해 첫 대사를 기록합니다. 2021년부터 시작했습니다.',
+  leadEn: 'I write down the first line of a film so I do not forget its story. I started in 2021.',
   current: 'all',
   desc: '2021년부터 모은 영화 첫 대사 아카이브',
 }), 'utf8')
@@ -473,7 +476,8 @@ for (const g of allGroups) {
   writeFileSync(join(OUT, 'group', `${g.key}.html`), listPage({
     items,
     title: `${g.name} — ${ABBR}`,
-    lead: `${g.definition} ${items.length}편.`,
+    lead: g.definition,
+    leadEn: g.definition_en,
     current: g.key,
     depth: 1,
     desc: g.definition,

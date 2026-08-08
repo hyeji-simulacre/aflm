@@ -42,6 +42,14 @@
 
 각 영화의 첫 대사는 해당 작품의 저작물입니다. 작품을 확인하기 위한 짧은 인용으로 싣고, 작품명과 개봉연도를 반드시 함께 표시합니다.
 
+#### About this archive (English)
+
+I write down the first line of every film I watch, so that I do not forget its story. The archive began in 2021 as a Notion database and moved here in August 2026.
+
+Each record keeps one spoken line, the film it came from, and the speech style that line belongs to. The style taxonomy is my own: 20 kinds grouped into 6 families. Film metadata and posters come from TMDB and KMDb; the first lines and the classification are written by hand.
+
+The site is built without a framework. HTML and CSS are written by hand, and a Node script turns `movies.json` into static pages.
+
 #### 문의
 
 [arche.jhj@gmail.com](mailto:arche.jhj@gmail.com)

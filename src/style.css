@@ -131,6 +131,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   letter-spacing: 0;
 }
 
+/* 영문은 한국어 아래 한 단계 여린 색으로 둔다 */
+.hero .lead.en, .groupsec .def.en {
+  margin-top: 8px;
+  color: var(--grey3);
+}
+
+.groupsec h2 .en {
+  margin-left: 12px;
+  color: var(--grey2);
+  font-weight: 500;
+}
+
 /* ── 분류 이동줄 ─────────────────────────────────────────────────────── */
 .groupbar {
   display: flex;

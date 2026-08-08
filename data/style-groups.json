@@ -9,7 +9,16 @@
       "definition": "두 사람 이상이 말을 주고받으며 영화가 시작한다.",
       "color": "olive",
       "hex": "#4F6B2B",
-      "styles": ["일상대화형", "인터뷰형", "전화통화형", "엄빠형", "회의형", "취조형"]
+      "styles": [
+        "일상대화형",
+        "인터뷰형",
+        "전화통화형",
+        "엄빠형",
+        "회의형",
+        "취조형"
+      ],
+      "name_en": "Dialogue",
+      "definition_en": "Two or more people are already talking when the film begins."
     },
     {
       "key": "monologue",
@@ -17,7 +26,13 @@
       "definition": "한 사람이 혼자 말하거나 마음속으로 말하며 시작한다.",
       "color": "hunter",
       "hex": "#2E5734",
-      "styles": ["독백형", "편지형", "기도형"]
+      "styles": [
+        "독백형",
+        "편지형",
+        "기도형"
+      ],
+      "name_en": "Monologue",
+      "definition_en": "Someone speaks alone, aloud or in their own head."
     },
     {
       "key": "exposition",
@@ -25,7 +40,13 @@
       "definition": "관객에게 세계나 상황을 먼저 설명하며 시작한다.",
       "color": "sage",
       "hex": "#8DA288",
-      "styles": ["배경설명형", "나레이션형", "프레젠테이션/강의형"]
+      "styles": [
+        "배경설명형",
+        "나레이션형",
+        "프레젠테이션/강의형"
+      ],
+      "name_en": "Exposition",
+      "definition_en": "The world or the situation is explained to the audience first."
     },
     {
       "key": "declaration",
@@ -33,7 +54,12 @@
       "definition": "화자가 자신이 누구인지 밝히거나 상대에게 지시하며 시작한다.",
       "color": "forest",
       "hex": "#1D9247",
-      "styles": ["자기소개형", "명령형"]
+      "styles": [
+        "자기소개형",
+        "명령형"
+      ],
+      "name_en": "Declaration",
+      "definition_en": "The speaker states who they are, or gives an order."
     },
     {
       "key": "transmission",
@@ -41,7 +67,12 @@
       "definition": "방송이나 통신 장비를 거쳐 전달된 말로 시작한다.",
       "color": "moss",
       "hex": "#8DAF59",
-      "styles": ["방송자료형", "무전통신형"]
+      "styles": [
+        "방송자료형",
+        "무전통신형"
+      ],
+      "name_en": "Transmission",
+      "definition_en": "The first words arrive through broadcast or radio equipment."
     },
     {
       "key": "text",
@@ -49,7 +80,13 @@
       "definition": "소리가 아니라 화면에 뜬 글자로 시작한다.",
       "color": "khaki",
       "hex": "#C8C464",
-      "styles": ["자막설명형", "제1장형", "관련자료형"]
+      "styles": [
+        "자막설명형",
+        "제1장형",
+        "관련자료형"
+      ],
+      "name_en": "Text",
+      "definition_en": "It begins not with sound but with words on screen."
     }
   ],
   "unassigned": {
@@ -57,7 +94,9 @@
     "name": "미분류",
     "definition": "Notion 원본에 Style 값이 비어 있는 기록. 사람이 분류를 지정하면 해당 군으로 옮긴다.",
     "color": "neutral",
-    "hex": "#9A9A93"
+    "hex": "#9A9A93",
+    "name_en": "Unassigned",
+    "definition_en": "Records with no speech style set in the Notion original. They move into a group once a style is assigned."
   },
   "genre_to_tag": {
     "_comment": "장르 칸에 섞여 있던 비장르 값. genre에서 떼어 tags로 옮긴다. genre_notion_original에 원본 문자열을 그대로 남기므로 되돌릴 수 있다.",
