@@ -167,18 +167,63 @@ async function tmdbDetail(id) {
   }
 }
 
+/**
+ * API가 채우는 필드만 갱신한다. 사람이 쓴 값(첫 대사, 분류, 제목)과
+ * Notion 원본 포스터는 건드리지 않는다.
+ */
+function applyTmdb(rec, meta) {
+  rec.tmdb_id = meta.tmdb_id
+  rec.title_original = meta.title_original ?? rec.title_original
+  rec.title_ko = meta.title_ko ?? rec.title_ko
+  rec.title_local = meta.title_local ?? rec.title_local
+  rec.release_date = meta.release_date ?? rec.release_date
+  rec.director = meta.director ?? rec.director
+  rec.director_ko = meta.director_ko ?? rec.director_ko ?? null
+  rec.country = meta.country ?? rec.country
+  if (rec.source.poster_url !== 'notion-original') {
+    rec.poster_url = meta.poster_url ?? rec.poster_url
+    rec.source.poster_url = rec.poster_url ? 'tmdb' : null
+  }
+  rec.source.title_ko = rec.title_ko ? 'tmdb' : null
+  rec.source.director = rec.director ? 'tmdb' : null
+  rec.updated_at = new Date().toISOString()
+}
+
 // ── 실행 ────────────────────────────────────────────────────────────────────
+// 사람이 직접 지정한 짝. 여기 있는 기록은 검색하지 않고 그대로 쓴다.
+const OVERRIDES = existsSync(join(root, 'data', 'match-overrides.json'))
+  ? JSON.parse(readFileSync(join(root, 'data', 'match-overrides.json'), 'utf8'))
+  : {}
+
 const records = JSON.parse(readFileSync(join(root, 'data', 'movies.json'), 'utf8'))
 const films = records.filter(r => r.record_kind !== 'page' && r.title)
 
 console.log(`영화 ${films.length}편을 조회합니다. 문서 기록과 제목 없는 기록은 건너뜁니다.\n`)
 
 const review = []
-let filled = 0, needsReview = 0, noResult = 0
+let filled = 0, needsReview = 0, noResult = 0, pinned = 0
 
 for (const [i, rec] of films.entries()) {
-  const { results, notes } = await lookup(rec)
   const progress = `[${String(i + 1).padStart(3)}/${films.length}]`
+
+  // 사람이 지정한 짝이 있으면 검색하지 않는다
+  const pin = OVERRIDES[rec.id]
+  if (pin && pin.source === 'tmdb' && Number.isInteger(pin.id)) {
+    try {
+      applyTmdb(rec, await tmdbDetail(pin.id))
+      rec.match_source = 'human-override'
+      rec.match_confirmed = pin.confirmed !== false
+      pinned++
+      console.log(`${progress} 지정 ${pin.confirmed === false ? '확인필요' : '        '}  ${rec.title}`)
+    } catch (e) {
+      review.push({ id: rec.id, title: rec.title, status: 'override_failed', notes: [e.message], candidates: [] })
+      console.log(`${progress} 지정 실패   ${rec.title}: ${e.message}`)
+    }
+    await sleep(60)
+    continue
+  }
+
+  const { results, notes } = await lookup(rec)
 
   if (results.length === 0) {
     noResult++
@@ -212,22 +257,7 @@ for (const [i, rec] of films.entries()) {
       await sleep(60)
       continue
     }
-    // API가 채우는 필드는 다시 돌릴 때 새 값으로 갱신한다. 사람이 쓴 값
-    // (첫 대사, 분류, 제목)과 Notion 원본 포스터는 건드리지 않는다.
-    rec.tmdb_id = meta.tmdb_id
-    rec.title_original = meta.title_original ?? rec.title_original
-    rec.title_ko = meta.title_ko ?? rec.title_ko
-    rec.title_local = meta.title_local ?? rec.title_local
-    rec.release_date = meta.release_date ?? rec.release_date
-    rec.director = meta.director ?? rec.director
-    rec.director_ko = meta.director_ko ?? rec.director_ko ?? null
-    rec.country = meta.country ?? rec.country
-    if (rec.source.poster_url !== 'notion-original') {
-      rec.poster_url = meta.poster_url ?? rec.poster_url
-      rec.source.poster_url = rec.poster_url ? 'tmdb' : null
-    }
-    rec.source.title_ko = rec.title_ko ? 'tmdb' : null
-    rec.source.director = rec.director ? 'tmdb' : null
+    applyTmdb(rec, meta)
   } else {
     rec.kmdb_id = hit.id
     rec.title_original = hit.title_original ?? rec.title_original
@@ -255,7 +285,7 @@ for (const [i, rec] of films.entries()) {
 const summary = {
   ran_at_note: '이 파일은 사람이 후보를 골라야 하는 건과 결과가 없는 건을 모은 것이다.',
   total: films.length,
-  filled, needs_review: needsReview, no_result: noResult,
+  filled, pinned, needs_review: needsReview, no_result: noResult,
   items: review,
 }
 
@@ -263,6 +293,7 @@ writeFileSync(join(root, 'data', 'enrich-review.json'), JSON.stringify(summary, 
 
 console.log('')
 console.log(`자동 확정   ${filled}편`)
+console.log(`사람 지정   ${pinned}편`)
 console.log(`확인 필요   ${needsReview}편`)
 console.log(`결과 없음   ${noResult}편`)
 console.log('')

@@ -25,7 +25,7 @@
     "tmdb_id": 365942,
     "kmdb_id": null,
     "created_at": "2021-07-31T20:15:00+09:00",
-    "updated_at": "2026-08-08T06:54:35.577Z",
+    "updated_at": "2026-08-08T09:23:53.867Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -67,7 +67,7 @@
     "tmdb_id": 76757,
     "kmdb_id": null,
     "created_at": "2021-07-31T22:11:00+09:00",
-    "updated_at": "2026-08-08T06:54:36.622Z",
+    "updated_at": "2026-08-08T09:23:54.702Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -110,7 +110,7 @@
     "tmdb_id": 330459,
     "kmdb_id": null,
     "created_at": "2021-08-07T23:59:00+09:00",
-    "updated_at": "2026-08-08T06:54:37.586Z",
+    "updated_at": "2026-08-08T09:23:55.553Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -153,7 +153,7 @@
     "tmdb_id": 564,
     "kmdb_id": null,
     "created_at": "2021-08-08T02:41:00+09:00",
-    "updated_at": "2026-08-08T06:54:38.758Z",
+    "updated_at": "2026-08-08T09:23:56.605Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -196,7 +196,7 @@
     "tmdb_id": 13475,
     "kmdb_id": null,
     "created_at": "2021-08-16T16:04:00+09:00",
-    "updated_at": "2026-08-08T06:54:40.201Z",
+    "updated_at": "2026-08-08T09:23:57.313Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -238,7 +238,7 @@
     "tmdb_id": 628534,
     "kmdb_id": null,
     "created_at": "2021-08-16T21:41:00+09:00",
-    "updated_at": "2026-08-08T06:54:41.334Z",
+    "updated_at": "2026-08-08T09:23:58.033Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -260,8 +260,8 @@
     "note": null,
     "title": "ARMY OF DEAD",
     "title_notion_original": "ARMY OF DEAD",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Army of the Dead",
+    "title_ko": "아미 오브 더 데드",
     "title_local": null,
     "first_line": "Gatekeeper, this is mother ship, the Four Horsemen are on the gallop.",
     "style": "무전통신형",
@@ -274,14 +274,14 @@
     "tags": [],
     "released": "2021",
     "released_notion_original": "2021",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2021-05-14",
+    "director": "Zack Snyder",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/gCIsRxzcxvmuLYeAvWgoOuSxszF.jpg",
+    "tmdb_id": 503736,
     "kmdb_id": null,
     "created_at": "2021-08-21T14:28:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:23:58.702Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -289,10 +289,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "star-trek-beyond-2016",
@@ -321,7 +326,7 @@
     "tmdb_id": 188927,
     "kmdb_id": null,
     "created_at": "2021-08-24T18:46:00+09:00",
-    "updated_at": "2026-08-08T06:54:42.719Z",
+    "updated_at": "2026-08-08T09:23:59.456Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -363,7 +368,7 @@
     "tmdb_id": 8909,
     "kmdb_id": null,
     "created_at": "2021-08-26T21:17:00+09:00",
-    "updated_at": "2026-08-08T06:54:43.786Z",
+    "updated_at": "2026-08-08T09:24:00.563Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -406,7 +411,7 @@
     "tmdb_id": 330,
     "kmdb_id": null,
     "created_at": "2021-08-28T23:17:00+09:00",
-    "updated_at": "2026-08-08T06:54:45.312Z",
+    "updated_at": "2026-08-08T09:24:01.303Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -449,7 +454,7 @@
     "tmdb_id": 135397,
     "kmdb_id": null,
     "created_at": "2021-08-28T23:19:00+09:00",
-    "updated_at": "2026-08-08T06:54:46.523Z",
+    "updated_at": "2026-08-08T09:24:02.123Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -492,7 +497,7 @@
     "tmdb_id": 49017,
     "kmdb_id": null,
     "created_at": "2021-09-02T18:36:00+09:00",
-    "updated_at": "2026-08-08T06:54:47.618Z",
+    "updated_at": "2026-08-08T09:24:02.933Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -535,7 +540,7 @@
     "tmdb_id": 121856,
     "kmdb_id": null,
     "created_at": "2021-09-04T16:39:00+09:00",
-    "updated_at": "2026-08-08T06:54:48.760Z",
+    "updated_at": "2026-08-08T09:24:03.683Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -578,7 +583,7 @@
     "tmdb_id": 379149,
     "kmdb_id": null,
     "created_at": "2021-09-04T22:33:00+09:00",
-    "updated_at": "2026-08-08T06:54:49.840Z",
+    "updated_at": "2026-08-08T09:24:04.602Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -620,7 +625,7 @@
     "tmdb_id": 1642,
     "kmdb_id": null,
     "created_at": "2021-09-07T15:17:00+09:00",
-    "updated_at": "2026-08-08T06:54:50.961Z",
+    "updated_at": "2026-08-08T09:24:05.423Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -665,7 +670,7 @@
     "tmdb_id": 68730,
     "kmdb_id": null,
     "created_at": "2021-09-19T18:59:00+09:00",
-    "updated_at": "2026-08-08T06:54:51.906Z",
+    "updated_at": "2026-08-08T09:24:06.242Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -687,8 +692,8 @@
     "note": null,
     "title": "THE MUMMY RETURN",
     "title_notion_original": "THE MUMMY RETURN",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "The Mummy Returns",
+    "title_ko": "미이라 2",
     "title_local": null,
     "first_line": "5 thousand years ago, a fierce warrior known as the Scorpion king led a great army on a campaign to conquer the known world.",
     "style": "배경설명형",
@@ -702,14 +707,14 @@
     "tags": [],
     "released": "2001",
     "released_notion_original": "2001",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2001-05-04",
+    "director": "Stephen Sommers",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/kdJsW7hcy1lrj7tdMPycTAQPAiR.jpg",
+    "tmdb_id": 1734,
     "kmdb_id": null,
     "created_at": "2021-09-22T20:54:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:06.823Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -717,10 +722,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": "스티븐 소머즈",
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "명량-2014",
@@ -749,7 +759,7 @@
     "tmdb_id": 282631,
     "kmdb_id": null,
     "created_at": "2021-09-25T16:32:00+09:00",
-    "updated_at": "2026-08-08T06:54:53.601Z",
+    "updated_at": "2026-08-08T09:24:07.573Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -792,7 +802,7 @@
     "tmdb_id": 223702,
     "kmdb_id": null,
     "created_at": "2021-09-25T23:01:00+09:00",
-    "updated_at": "2026-08-08T06:54:54.650Z",
+    "updated_at": "2026-08-08T09:24:08.323Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -814,7 +824,7 @@
     "note": null,
     "title": "Windy city heat WINDY CITY HEAT",
     "title_notion_original": "Windy city heat WINDY CITY HEAT",
-    "title_original": null,
+    "title_original": "Windy City Heat",
     "title_ko": null,
     "title_local": null,
     "first_line": "My name is Stone, Stone Perry.",
@@ -827,14 +837,14 @@
     "tags": [],
     "released": "2003",
     "released_notion_original": "2003",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2003-10-12",
+    "director": "Bobcat Goldthwait",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/nAHkyMQbTufFk9P6f7Jv5BXaQCs.jpg",
+    "tmdb_id": 47126,
     "kmdb_id": null,
     "created_at": "2021-09-26T20:24:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:08.802Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -842,10 +852,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": null,
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "inglorious-basterds-2009",
@@ -853,8 +868,8 @@
     "note": null,
     "title": "INGLORIOUS BASTERDS",
     "title_notion_original": "INGLORIOUS BASTERDS",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Inglourious Basterds",
+    "title_ko": "바스터즈: 거친 녀석들",
     "title_local": null,
     "first_line": "Papa!",
     "style": "엄빠형",
@@ -868,14 +883,14 @@
     "tags": [],
     "released": "2009",
     "released_notion_original": "2009",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2009-08-02",
+    "director": "Quentin Tarantino",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/aupnPtagH9JVBuMrGEanf4iqXEQ.jpg",
+    "tmdb_id": 16869,
     "kmdb_id": null,
     "created_at": "2021-10-02T22:52:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:09.323Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -883,10 +898,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "아빠는-딸-2017",
@@ -917,7 +937,7 @@
     "tmdb_id": 451105,
     "kmdb_id": null,
     "created_at": "2021-10-14T19:09:00+09:00",
-    "updated_at": "2026-08-08T06:54:56.452Z",
+    "updated_at": "2026-08-08T09:24:10.152Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -961,7 +981,7 @@
     "tmdb_id": 453,
     "kmdb_id": null,
     "created_at": "2021-10-14T19:09:00+09:00",
-    "updated_at": "2026-08-08T06:54:57.379Z",
+    "updated_at": "2026-08-08T09:24:11.032Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1005,7 +1025,7 @@
     "tmdb_id": 514847,
     "kmdb_id": null,
     "created_at": "2021-10-16T23:43:00+09:00",
-    "updated_at": "2026-08-08T06:54:58.503Z",
+    "updated_at": "2026-08-08T09:24:11.933Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1050,7 +1070,7 @@
     "tmdb_id": null,
     "kmdb_id": "K-09499",
     "created_at": "2021-10-16T23:43:00+09:00",
-    "updated_at": "2026-08-08T06:54:58.844Z",
+    "updated_at": "2026-08-08T09:24:12.175Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1093,7 +1113,7 @@
     "tmdb_id": 556509,
     "kmdb_id": null,
     "created_at": "2021-11-14T13:26:00+09:00",
-    "updated_at": "2026-08-08T06:54:59.832Z",
+    "updated_at": "2026-08-08T09:24:12.983Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1115,8 +1135,8 @@
     "note": null,
     "title": "MAZE RUNNER: DEATH CURE",
     "title_notion_original": "MAZE RUNNER: DEATH CURE",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Maze Runner: The Death Cure",
+    "title_ko": "메이즈 러너: 데스 큐어",
     "title_local": null,
     "first_line": "They're  late.",
     "style": "일상대화형",
@@ -1130,14 +1150,14 @@
     "tags": [],
     "released": "2018",
     "released_notion_original": "2018",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2018-01-10",
+    "director": "Wes Ball",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/s8K0US4tUEoOrQ1LDh0eppuwGDx.jpg",
+    "tmdb_id": 336843,
     "kmdb_id": null,
     "created_at": "2021-11-15T21:31:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:13.503Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1145,10 +1165,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "black-widow-2021",
@@ -1178,7 +1203,7 @@
     "tmdb_id": 497698,
     "kmdb_id": null,
     "created_at": "2021-11-16T19:25:00+09:00",
-    "updated_at": "2026-08-08T06:55:01.408Z",
+    "updated_at": "2026-08-08T09:24:14.420Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1223,7 +1248,7 @@
     "tmdb_id": 99861,
     "kmdb_id": null,
     "created_at": "2021-11-24T20:02:00+09:00",
-    "updated_at": "2026-08-08T06:55:02.355Z",
+    "updated_at": "2026-08-08T09:24:15.197Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1245,8 +1270,8 @@
     "note": null,
     "title": "WONDERWOMAN",
     "title_notion_original": "WONDERWOMAN",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Wonder Woman",
+    "title_ko": "원더 우먼",
     "title_local": null,
     "first_line": "I used to want to save the world.",
     "style": "자기소개형",
@@ -1260,14 +1285,14 @@
     "tags": [],
     "released": "2017",
     "released_notion_original": "2017",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2017-05-30",
+    "director": "Patty Jenkins",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/v4ncgZjG2Zu8ZW5al1vIZTsSjqX.jpg",
+    "tmdb_id": 297762,
     "kmdb_id": null,
     "created_at": "2021-11-28T12:54:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:16.053Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1275,10 +1300,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": "패티 젠킨스",
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "edward-scissorhands-1990",
@@ -1309,7 +1339,7 @@
     "tmdb_id": 162,
     "kmdb_id": null,
     "created_at": "2021-12-18T11:19:00+09:00",
-    "updated_at": "2026-08-08T06:55:03.724Z",
+    "updated_at": "2026-08-08T09:24:16.813Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1354,7 +1384,7 @@
     "tmdb_id": 1930,
     "kmdb_id": null,
     "created_at": "2021-12-21T20:47:00+09:00",
-    "updated_at": "2026-08-08T06:55:04.971Z",
+    "updated_at": "2026-08-08T09:24:17.704Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1399,7 +1429,7 @@
     "tmdb_id": 102382,
     "kmdb_id": null,
     "created_at": "2021-12-23T18:18:00+09:00",
-    "updated_at": "2026-08-08T06:55:06.016Z",
+    "updated_at": "2026-08-08T09:24:18.472Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1443,7 +1473,7 @@
     "tmdb_id": 843,
     "kmdb_id": null,
     "created_at": "2021-12-28T14:30:00+09:00",
-    "updated_at": "2026-08-08T06:55:06.981Z",
+    "updated_at": "2026-08-08T09:24:19.135Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1487,7 +1517,7 @@
     "tmdb_id": 11104,
     "kmdb_id": null,
     "created_at": "2021-12-28T16:24:00+09:00",
-    "updated_at": "2026-08-08T06:55:07.958Z",
+    "updated_at": "2026-08-08T09:24:19.842Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1530,7 +1560,7 @@
     "tmdb_id": 646380,
     "kmdb_id": null,
     "created_at": "2021-12-31T22:33:00+09:00",
-    "updated_at": "2026-08-08T06:55:09.022Z",
+    "updated_at": "2026-08-08T09:24:20.523Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1576,7 +1606,7 @@
     "tmdb_id": 607844,
     "kmdb_id": null,
     "created_at": "2022-01-01T12:31:00+09:00",
-    "updated_at": "2026-08-08T06:55:10.191Z",
+    "updated_at": "2026-08-08T09:24:21.202Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1598,8 +1628,8 @@
     "note": null,
     "title": "PREDETOR",
     "title_notion_original": "PREDETOR",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Predator",
+    "title_ko": "프레데터",
     "title_local": null,
     "first_line": "You’re looking good, Dutch.",
     "style": "일상대화형",
@@ -1613,14 +1643,14 @@
     "tags": [],
     "released": "1987",
     "released_notion_original": "1987",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "1987-06-12",
+    "director": "John McTiernan",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/k3mW4qfJo6SKqe6laRyNGnbB9n5.jpg",
+    "tmdb_id": 106,
     "kmdb_id": null,
     "created_at": "2022-01-01T18:17:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:21.919Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1628,10 +1658,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "甜蜜蜜-1996",
@@ -1661,7 +1696,7 @@
     "tmdb_id": 37185,
     "kmdb_id": null,
     "created_at": "2022-01-19T18:43:00+09:00",
-    "updated_at": "2026-08-08T06:55:11.349Z",
+    "updated_at": "2026-08-08T09:24:22.653Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1706,7 +1741,7 @@
     "tmdb_id": 335983,
     "kmdb_id": null,
     "created_at": "2022-01-20T21:07:00+09:00",
-    "updated_at": "2026-08-08T06:55:12.403Z",
+    "updated_at": "2026-08-08T09:24:23.333Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1750,7 +1785,7 @@
     "tmdb_id": 152601,
     "kmdb_id": null,
     "created_at": "2022-01-23T09:10:00+09:00",
-    "updated_at": "2026-08-08T06:55:13.376Z",
+    "updated_at": "2026-08-08T09:24:24.012Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1772,8 +1807,8 @@
     "note": null,
     "title": "TIK, TIK... BOOM!",
     "title_notion_original": "TIK, TIK... BOOM!",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "tick, tick... BOOM!",
+    "title_ko": "틱, 틱... 붐!",
     "title_local": null,
     "first_line": "Hi, I’m John, I’m a musical theater writter.",
     "style": "자기소개형",
@@ -1788,14 +1823,14 @@
     ],
     "released": "2021",
     "released_notion_original": "2021",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2021-11-11",
+    "director": "Lin-Manuel Miranda",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/DPmfcuR8fh8ROYXgdjrAjSGA0o.jpg",
+    "tmdb_id": 537116,
     "kmdb_id": null,
     "created_at": "2022-01-26T18:51:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:24.523Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1803,10 +1838,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "dunkirk-2017",
@@ -1837,7 +1877,7 @@
     "tmdb_id": 374720,
     "kmdb_id": null,
     "created_at": "2022-01-26T20:46:00+09:00",
-    "updated_at": "2026-08-08T06:55:14.546Z",
+    "updated_at": "2026-08-08T09:24:25.203Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1880,7 +1920,7 @@
     "tmdb_id": 157336,
     "kmdb_id": null,
     "created_at": "2022-01-29T12:35:00+09:00",
-    "updated_at": "2026-08-08T06:55:15.788Z",
+    "updated_at": "2026-08-08T09:24:25.983Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1902,8 +1942,8 @@
     "note": "Actually “the dawn of men” is a title of the first chapter, actors and actresses just yelled as apes. 🦍",
     "title": "2001 A SPACE ODYSEY",
     "title_notion_original": "2001 A SPACE ODYSEY",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "2001: A Space Odyssey",
+    "title_ko": "2001 스페이스 오디세이",
     "title_local": null,
     "first_line": "The dawn of men",
     "style": "제1장형",
@@ -1916,14 +1956,14 @@
     "tags": [],
     "released": "1968",
     "released_notion_original": "1968",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "1968-04-02",
+    "director": "Stanley Kubrick",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/ve72VxNqjGM69Uky4WTo2bK6rfq.jpg",
+    "tmdb_id": 62,
     "kmdb_id": null,
     "created_at": "2022-01-29T15:47:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:26.703Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -1931,10 +1971,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": "notion-original",
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "the-fifth-element-1997",
@@ -1963,7 +2008,7 @@
     "tmdb_id": null,
     "kmdb_id": "F-05457",
     "created_at": "2022-02-03T19:17:00+09:00",
-    "updated_at": "2026-08-08T06:55:16.507Z",
+    "updated_at": "2026-08-08T09:24:26.923Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2005,7 +2050,7 @@
     "tmdb_id": 49047,
     "kmdb_id": null,
     "created_at": "2022-02-06T16:02:00+09:00",
-    "updated_at": "2026-08-08T06:55:17.533Z",
+    "updated_at": "2026-08-08T09:24:27.663Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2050,7 +2095,7 @@
     "tmdb_id": 324786,
     "kmdb_id": null,
     "created_at": "2022-02-06T17:04:00+09:00",
-    "updated_at": "2026-08-08T06:55:18.421Z",
+    "updated_at": "2026-08-08T09:24:28.333Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2072,8 +2117,8 @@
     "note": null,
     "title": "THE TIME TRAVELER’S WHIFE",
     "title_notion_original": "THE TIME TRAVELER’S WHIFE",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "The Time Traveler's Wife",
+    "title_ko": "시간 여행자의 아내",
     "title_local": null,
     "first_line": "I can’t sing.",
     "style": "일상대화형",
@@ -2089,14 +2134,14 @@
     ],
     "released": "2009",
     "released_notion_original": "2009",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2009-08-14",
+    "director": "Robert Schwentke",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/J3ewuzQwhFro0pDpdcbZ4j7MYy.jpg",
+    "tmdb_id": 24420,
     "kmdb_id": null,
     "created_at": "2022-02-06T19:38:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:28.843Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2104,10 +2149,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": "로베르트 슈벤트케",
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "portrait-de-la-jeune-fille-en-feu-2019",
@@ -2138,7 +2188,7 @@
     "tmdb_id": 531428,
     "kmdb_id": null,
     "created_at": "2022-02-12T16:27:00+09:00",
-    "updated_at": "2026-08-08T06:55:19.686Z",
+    "updated_at": "2026-08-08T09:24:29.593Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2180,7 +2230,7 @@
     "tmdb_id": 762,
     "kmdb_id": null,
     "created_at": "2022-02-21T12:35:00+09:00",
-    "updated_at": "2026-08-08T06:55:20.734Z",
+    "updated_at": "2026-08-08T09:24:30.383Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2223,7 +2273,7 @@
     "tmdb_id": 578908,
     "kmdb_id": null,
     "created_at": "2022-02-21T12:39:00+09:00",
-    "updated_at": "2026-08-08T06:55:21.800Z",
+    "updated_at": "2026-08-08T09:24:31.093Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2265,7 +2315,7 @@
     "tmdb_id": 12153,
     "kmdb_id": null,
     "created_at": "2022-02-21T18:40:00+09:00",
-    "updated_at": "2026-08-08T06:55:22.708Z",
+    "updated_at": "2026-08-08T09:24:31.813Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2308,7 +2358,7 @@
     "tmdb_id": 7131,
     "kmdb_id": null,
     "created_at": "2022-03-02T20:51:00+09:00",
-    "updated_at": "2026-08-08T06:55:23.872Z",
+    "updated_at": "2026-08-08T09:24:32.573Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2350,7 +2400,7 @@
     "tmdb_id": 4550,
     "kmdb_id": null,
     "created_at": "2022-03-07T16:14:00+09:00",
-    "updated_at": "2026-08-08T06:55:24.765Z",
+    "updated_at": "2026-08-08T09:24:33.303Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2394,7 +2444,7 @@
     "tmdb_id": 64682,
     "kmdb_id": null,
     "created_at": "2022-03-07T21:00:00+09:00",
-    "updated_at": "2026-08-08T06:55:25.748Z",
+    "updated_at": "2026-08-08T09:24:34.114Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2439,7 +2489,7 @@
     "tmdb_id": 978,
     "kmdb_id": null,
     "created_at": "2022-03-13T16:38:00+09:00",
-    "updated_at": "2026-08-08T06:55:26.766Z",
+    "updated_at": "2026-08-08T09:24:34.774Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2481,7 +2531,7 @@
     "tmdb_id": 194,
     "kmdb_id": null,
     "created_at": "2022-03-13T16:45:00+09:00",
-    "updated_at": "2026-08-08T06:55:27.876Z",
+    "updated_at": "2026-08-08T09:24:35.604Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2524,7 +2574,7 @@
     "tmdb_id": 564863,
     "kmdb_id": null,
     "created_at": "2022-03-13T19:25:00+09:00",
-    "updated_at": "2026-08-08T06:55:28.820Z",
+    "updated_at": "2026-08-08T09:24:36.332Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2569,7 +2619,7 @@
     "tmdb_id": 339877,
     "kmdb_id": null,
     "created_at": "2022-03-16T22:50:00+09:00",
-    "updated_at": "2026-08-08T06:55:29.978Z",
+    "updated_at": "2026-08-08T09:24:37.333Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2613,7 +2663,7 @@
     "tmdb_id": 290098,
     "kmdb_id": null,
     "created_at": "2022-03-20T21:15:00+09:00",
-    "updated_at": "2026-08-08T06:55:31.108Z",
+    "updated_at": "2026-08-08T09:24:38.013Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2657,7 +2707,7 @@
     "tmdb_id": 1904,
     "kmdb_id": null,
     "created_at": "2022-03-28T10:15:00+09:00",
-    "updated_at": "2026-08-08T06:55:32.266Z",
+    "updated_at": "2026-08-08T09:24:38.913Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2701,7 +2751,7 @@
     "tmdb_id": 339403,
     "kmdb_id": null,
     "created_at": "2022-03-28T22:20:00+09:00",
-    "updated_at": "2026-08-08T06:55:33.237Z",
+    "updated_at": "2026-08-08T09:24:39.705Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2746,7 +2796,7 @@
     "tmdb_id": 76203,
     "kmdb_id": null,
     "created_at": "2022-04-02T07:09:00+09:00",
-    "updated_at": "2026-08-08T06:55:34.182Z",
+    "updated_at": "2026-08-08T09:24:40.373Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2768,8 +2818,8 @@
     "note": null,
     "title": "MAN IN BLACK 3",
     "title_notion_original": "MAN IN BLACK 3",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Men in Black 3",
+    "title_ko": "맨 인 블랙 3",
     "title_local": null,
     "first_line": "Well well, Boris the Animal has a visitor.",
     "style": "일상대화형",
@@ -2782,14 +2832,14 @@
     "tags": [],
     "released": "2012",
     "released_notion_original": "2012",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2012-05-23",
+    "director": "Barry Sonnenfeld",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/90DdoEStzeObs96fsYf4GG544iN.jpg",
+    "tmdb_id": 41154,
     "kmdb_id": null,
     "created_at": "2022-04-02T22:09:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:40.912Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2797,10 +2847,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": "배리 소넨펠드",
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "nobody-2021",
@@ -2828,7 +2883,7 @@
     "tmdb_id": 615457,
     "kmdb_id": null,
     "created_at": "2022-04-12T10:49:00+09:00",
-    "updated_at": "2026-08-08T06:55:35.450Z",
+    "updated_at": "2026-08-08T09:24:41.764Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2871,7 +2926,7 @@
     "tmdb_id": 297802,
     "kmdb_id": null,
     "created_at": "2022-04-13T09:55:00+09:00",
-    "updated_at": "2026-08-08T06:55:36.487Z",
+    "updated_at": "2026-08-08T09:24:42.614Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2914,7 +2969,7 @@
     "tmdb_id": 546554,
     "kmdb_id": null,
     "created_at": "2022-04-17T19:12:00+09:00",
-    "updated_at": "2026-08-08T06:55:37.690Z",
+    "updated_at": "2026-08-08T09:24:43.404Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -2957,7 +3012,7 @@
     "tmdb_id": 11178,
     "kmdb_id": null,
     "created_at": "2022-05-05T22:43:00+09:00",
-    "updated_at": "2026-08-08T06:55:38.595Z",
+    "updated_at": "2026-08-08T09:24:44.103Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3001,7 +3056,7 @@
     "tmdb_id": 399174,
     "kmdb_id": null,
     "created_at": "2022-05-11T11:43:00+09:00",
-    "updated_at": "2026-08-08T06:55:39.799Z",
+    "updated_at": "2026-08-08T09:24:44.774Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3023,9 +3078,9 @@
     "note": null,
     "title": "RING",
     "title_notion_original": "RING",
-    "title_original": null,
-    "title_ko": null,
-    "title_local": null,
+    "title_original": "リング",
+    "title_ko": "링",
+    "title_local": "リング",
     "first_line": "초등학생 남자애네 가족이 이즈네 펜션에서 묵었었대.",
     "style": "일상대화형",
     "style_group": "dialogue",
@@ -3036,14 +3091,14 @@
     "tags": [],
     "released": "1998",
     "released_notion_original": "1998",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "1998-01-31",
+    "director": "中田 秀夫",
+    "country": "JP",
+    "poster_url": "https://image.tmdb.org/t/p/w500/6KWX8jRZHtfXLGGViKAcUW41ZXs.jpg",
+    "tmdb_id": 2671,
     "kmdb_id": null,
     "created_at": "2022-05-17T22:14:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:45.344Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3051,10 +3106,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "2046-2004",
@@ -3082,7 +3142,7 @@
     "tmdb_id": 844,
     "kmdb_id": null,
     "created_at": "2022-05-17T22:17:00+09:00",
-    "updated_at": "2026-08-08T06:55:41.062Z",
+    "updated_at": "2026-08-08T09:24:46.087Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3128,7 +3188,7 @@
     "tmdb_id": 2135,
     "kmdb_id": null,
     "created_at": "2022-05-20T08:58:00+09:00",
-    "updated_at": "2026-08-08T06:55:42.200Z",
+    "updated_at": "2026-08-08T09:24:46.873Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3172,7 +3232,7 @@
     "tmdb_id": 13183,
     "kmdb_id": null,
     "created_at": "2022-05-23T23:22:00+09:00",
-    "updated_at": "2026-08-08T06:55:43.645Z",
+    "updated_at": "2026-08-08T09:24:47.614Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3218,7 +3278,7 @@
     "tmdb_id": 437081,
     "kmdb_id": null,
     "created_at": "2022-07-10T00:57:00+09:00",
-    "updated_at": "2026-08-08T06:55:45.426Z",
+    "updated_at": "2026-08-08T09:24:48.354Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3261,7 +3321,7 @@
     "tmdb_id": 1635,
     "kmdb_id": null,
     "created_at": "2022-07-11T23:04:00+09:00",
-    "updated_at": "2026-08-08T06:55:46.798Z",
+    "updated_at": "2026-08-08T09:24:49.044Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3306,7 +3366,7 @@
     "tmdb_id": 1427,
     "kmdb_id": null,
     "created_at": "2022-07-13T22:30:00+09:00",
-    "updated_at": "2026-08-08T06:55:47.895Z",
+    "updated_at": "2026-08-08T09:24:49.764Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3350,7 +3410,7 @@
     "tmdb_id": 269149,
     "kmdb_id": null,
     "created_at": "2022-07-17T16:16:00+09:00",
-    "updated_at": "2026-08-08T06:55:48.952Z",
+    "updated_at": "2026-08-08T09:24:50.443Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3431,7 +3491,7 @@
     "tmdb_id": 419430,
     "kmdb_id": null,
     "created_at": "2022-07-19T23:15:00+09:00",
-    "updated_at": "2026-08-08T06:55:49.850Z",
+    "updated_at": "2026-08-08T09:24:51.273Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3453,8 +3513,8 @@
     "note": null,
     "title": "SPORTLIGHT",
     "title_notion_original": "SPORTLIGHT",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Spotlight",
+    "title_ko": "스포트라이트",
     "title_local": null,
     "first_line": "How’s that going? Oh, her mother and uncle are pissed off.",
     "style": "일상대화형",
@@ -3468,14 +3528,14 @@
     ],
     "released": "2015",
     "released_notion_original": "2015",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2015-11-06",
+    "director": "Tom McCarthy",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/8DPGG400FgaFWaqcv11n8mRd2NG.jpg",
+    "tmdb_id": 314365,
     "kmdb_id": null,
     "created_at": "2022-07-20T22:24:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:52.443Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3483,10 +3543,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": "톰 맥카시",
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "equilibrium-2003",
@@ -3516,7 +3581,7 @@
     "tmdb_id": 7299,
     "kmdb_id": null,
     "created_at": "2022-07-26T10:03:00+09:00",
-    "updated_at": "2026-08-08T06:55:51.045Z",
+    "updated_at": "2026-08-08T09:24:53.254Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3559,7 +3624,7 @@
     "tmdb_id": 1272,
     "kmdb_id": null,
     "created_at": "2022-07-31T14:38:00+09:00",
-    "updated_at": "2026-08-08T06:55:52.113Z",
+    "updated_at": "2026-08-08T09:24:54.013Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3603,7 +3668,7 @@
     "tmdb_id": 76341,
     "kmdb_id": null,
     "created_at": "2022-08-01T08:06:00+09:00",
-    "updated_at": "2026-08-08T06:55:53.178Z",
+    "updated_at": "2026-08-08T09:24:54.763Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3645,7 +3710,7 @@
     "tmdb_id": 2034,
     "kmdb_id": null,
     "created_at": "2022-08-02T22:39:00+09:00",
-    "updated_at": "2026-08-08T06:55:54.157Z",
+    "updated_at": "2026-08-08T09:24:55.434Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3667,8 +3732,8 @@
     "note": null,
     "title": "DEJAVU",
     "title_notion_original": "DEJAVU",
-    "title_original": "Dejavú",
-    "title_ko": null,
+    "title_original": "Déjà Vu",
+    "title_ko": "데자뷰",
     "title_local": "Dejavú",
     "first_line": "Can’t believe it. They’re right on time. Let’s get these boys to their party.",
     "style": "일상대화형",
@@ -3683,14 +3748,14 @@
     "tags": [],
     "released": "2006",
     "released_notion_original": "2006",
-    "release_date": "2005-01-02",
-    "director": "César Rodríguez",
-    "country": "ES",
-    "poster_url": null,
-    "tmdb_id": 405430,
+    "release_date": "2006-11-22",
+    "director": "Tony Scott",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/eTX6hklzFOiEVqVukNCEedZKhix.jpg",
+    "tmdb_id": 7551,
     "kmdb_id": null,
     "created_at": "2022-08-05T11:45:00+09:00",
-    "updated_at": "2026-08-08T06:55:55.250Z",
+    "updated_at": "2026-08-08T09:24:55.974Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3698,13 +3763,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null,
-      "title_ko": null,
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
       "director": "tmdb"
     },
     "director_ko": null,
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "cloud-atlas-2012",
@@ -3732,13 +3799,13 @@
     "released": "2012",
     "released_notion_original": "2012",
     "release_date": "2012-10-26",
-    "director": "Lana Wachowski",
+    "director": "Lilly Wachowski",
     "country": "US",
     "poster_url": "https://image.tmdb.org/t/p/w500/8naVv2Xu3rWI5JKHz0vCujx6GaJ.jpg",
     "tmdb_id": 83542,
     "kmdb_id": null,
     "created_at": "2022-08-06T14:57:00+09:00",
-    "updated_at": "2026-08-08T06:55:56.147Z",
+    "updated_at": "2026-08-08T09:24:56.823Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3783,7 +3850,7 @@
     "tmdb_id": 19995,
     "kmdb_id": null,
     "created_at": "2022-08-07T21:36:00+09:00",
-    "updated_at": "2026-08-08T06:55:57.299Z",
+    "updated_at": "2026-08-08T09:24:57.603Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3805,9 +3872,9 @@
     "note": "건배, 건배!",
     "title": "SHUTTER",
     "title_notion_original": "SHUTTER",
-    "title_original": null,
-    "title_ko": null,
-    "title_local": null,
+    "title_original": "ชัตเตอร์ กดติดวิญญาณ",
+    "title_ko": "셔터",
+    "title_local": "ชัตเตอร์ กดติดวิญญาณ",
     "first_line": "ไชโย, ไชโย!",
     "style": "일상대화형",
     "style_group": "dialogue",
@@ -3818,14 +3885,14 @@
     "tags": [],
     "released": "2004",
     "released_notion_original": "2004",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2004-09-09",
+    "director": "โต้ง",
+    "country": "TH",
+    "poster_url": "https://image.tmdb.org/t/p/w500/c73npKeocy779c6zmXjkfJehV2Q.jpg",
+    "tmdb_id": 17111,
     "kmdb_id": null,
     "created_at": "2022-08-14T01:50:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:24:58.163Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3833,10 +3900,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": "notion-original",
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "finding-vivian-maier-2015",
@@ -3867,7 +3939,7 @@
     "tmdb_id": 169607,
     "kmdb_id": null,
     "created_at": "2022-08-19T12:37:00+09:00",
-    "updated_at": "2026-08-08T06:55:58.479Z",
+    "updated_at": "2026-08-08T09:24:58.825Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3909,7 +3981,7 @@
     "tmdb_id": 89501,
     "kmdb_id": null,
     "created_at": "2022-08-21T15:35:00+09:00",
-    "updated_at": "2026-08-08T06:55:59.721Z",
+    "updated_at": "2026-08-08T09:24:59.494Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -3954,7 +4026,7 @@
     "tmdb_id": null,
     "kmdb_id": "F-57294",
     "created_at": "2022-08-26T19:25:00+09:00",
-    "updated_at": "2026-08-08T06:56:00.143Z",
+    "updated_at": "2026-08-08T09:24:59.714Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4000,7 +4072,7 @@
     "tmdb_id": 947,
     "kmdb_id": null,
     "created_at": "2022-09-02T19:20:00+09:00",
-    "updated_at": "2026-08-08T06:56:01.511Z",
+    "updated_at": "2026-08-08T09:25:00.434Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4043,7 +4115,7 @@
     "tmdb_id": 878974,
     "kmdb_id": null,
     "created_at": "2022-09-08T14:30:00+09:00",
-    "updated_at": "2026-08-08T06:56:02.667Z",
+    "updated_at": "2026-08-08T09:25:01.203Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4087,7 +4159,7 @@
     "tmdb_id": 267573,
     "kmdb_id": null,
     "created_at": "2022-09-17T18:00:00+09:00",
-    "updated_at": "2026-08-08T06:56:03.781Z",
+    "updated_at": "2026-08-08T09:25:01.964Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4132,7 +4204,7 @@
     "tmdb_id": 616037,
     "kmdb_id": null,
     "created_at": "2022-09-18T01:37:00+09:00",
-    "updated_at": "2026-08-08T06:56:04.999Z",
+    "updated_at": "2026-08-08T09:25:02.834Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4175,7 +4247,7 @@
     "tmdb_id": 419704,
     "kmdb_id": null,
     "created_at": "2022-09-21T19:07:00+09:00",
-    "updated_at": "2026-08-08T06:56:06.532Z",
+    "updated_at": "2026-08-08T09:25:03.564Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4219,7 +4291,7 @@
     "tmdb_id": 492,
     "kmdb_id": null,
     "created_at": "2022-09-25T20:07:00+09:00",
-    "updated_at": "2026-08-08T06:56:07.568Z",
+    "updated_at": "2026-08-08T09:25:04.214Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4263,7 +4335,7 @@
     "tmdb_id": 716612,
     "kmdb_id": null,
     "created_at": "2022-09-26T20:13:00+09:00",
-    "updated_at": "2026-08-08T06:56:08.668Z",
+    "updated_at": "2026-08-08T09:25:04.945Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4306,7 +4378,7 @@
     "tmdb_id": 1003180,
     "kmdb_id": null,
     "created_at": "2022-09-28T19:39:00+09:00",
-    "updated_at": "2026-08-08T06:56:09.871Z",
+    "updated_at": "2026-08-08T09:25:05.643Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4350,7 +4422,7 @@
     "tmdb_id": 854323,
     "kmdb_id": null,
     "created_at": "2022-10-01T18:33:00+09:00",
-    "updated_at": "2026-08-08T06:56:11.075Z",
+    "updated_at": "2026-08-08T09:25:06.356Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4394,7 +4466,7 @@
     "tmdb_id": 4518,
     "kmdb_id": null,
     "created_at": "2022-10-10T17:33:00+09:00",
-    "updated_at": "2026-08-08T06:56:12.283Z",
+    "updated_at": "2026-08-08T09:25:07.454Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4436,7 +4508,7 @@
     "tmdb_id": 605193,
     "kmdb_id": null,
     "created_at": "2022-10-16T18:10:00+09:00",
-    "updated_at": "2026-08-08T06:56:13.737Z",
+    "updated_at": "2026-08-08T09:25:08.215Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4479,7 +4551,7 @@
     "tmdb_id": 458305,
     "kmdb_id": null,
     "created_at": "2022-10-23T19:08:00+09:00",
-    "updated_at": "2026-08-08T06:56:14.952Z",
+    "updated_at": "2026-08-08T09:25:08.874Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4524,7 +4596,7 @@
     "tmdb_id": 3558,
     "kmdb_id": null,
     "created_at": "2022-10-23T21:04:00+09:00",
-    "updated_at": "2026-08-08T06:56:16.221Z",
+    "updated_at": "2026-08-08T09:25:09.733Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4570,7 +4642,7 @@
     "tmdb_id": 472454,
     "kmdb_id": null,
     "created_at": "2022-10-28T23:28:00+09:00",
-    "updated_at": "2026-08-08T06:56:17.308Z",
+    "updated_at": "2026-08-08T09:25:10.394Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4613,7 +4685,7 @@
     "tmdb_id": 399055,
     "kmdb_id": null,
     "created_at": "2022-10-28T23:47:00+09:00",
-    "updated_at": "2026-08-08T06:56:18.359Z",
+    "updated_at": "2026-08-08T09:25:11.144Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4657,7 +4729,7 @@
     "tmdb_id": 120,
     "kmdb_id": null,
     "created_at": "2022-10-29T19:42:00+09:00",
-    "updated_at": "2026-08-08T06:56:19.653Z",
+    "updated_at": "2026-08-08T09:25:11.874Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4699,7 +4771,7 @@
     "tmdb_id": 121,
     "kmdb_id": null,
     "created_at": "2022-10-29T23:59:00+09:00",
-    "updated_at": "2026-08-08T06:56:20.692Z",
+    "updated_at": "2026-08-08T09:25:12.764Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4744,7 +4816,7 @@
     "tmdb_id": 446791,
     "kmdb_id": null,
     "created_at": "2022-11-11T17:43:00+09:00",
-    "updated_at": "2026-08-08T06:56:22.203Z",
+    "updated_at": "2026-08-08T09:25:13.424Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4766,8 +4838,8 @@
     "note": null,
     "title": "THE SCHOOL OF GOOD AND EVIL",
     "title_notion_original": "THE SCHOOL OF GOOD AND EVIL",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "The School for Good and Evil",
+    "title_ko": "선과 악의 학교",
     "title_local": null,
     "first_line": "Many years ago, two powerful brothers created a school to keep the balance between Good and Evil in the fairy tale world.",
     "style": "자막설명형",
@@ -4781,14 +4853,14 @@
     ],
     "released": "2022",
     "released_notion_original": "2022",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2022-10-19",
+    "director": "Paul Feig",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/6oZeEu1GDILdwezmZ5e2xWISf1C.jpg",
+    "tmdb_id": 779782,
     "kmdb_id": null,
     "created_at": "2022-11-14T19:46:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:25:13.950Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4796,10 +4868,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": "폴 페이그",
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "memento-2000",
@@ -4830,7 +4907,7 @@
     "tmdb_id": 77,
     "kmdb_id": null,
     "created_at": "2022-11-18T00:09:00+09:00",
-    "updated_at": "2026-08-08T06:56:23.557Z",
+    "updated_at": "2026-08-08T09:25:14.694Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4872,7 +4949,7 @@
     "tmdb_id": 34803,
     "kmdb_id": null,
     "created_at": "2022-11-27T21:11:00+09:00",
-    "updated_at": "2026-08-08T06:56:24.707Z",
+    "updated_at": "2026-08-08T09:25:15.464Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4915,7 +4992,7 @@
     "tmdb_id": 668461,
     "kmdb_id": null,
     "created_at": "2022-12-01T19:26:00+09:00",
-    "updated_at": "2026-08-08T06:56:25.706Z",
+    "updated_at": "2026-08-08T09:25:16.166Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -4959,7 +5036,7 @@
     "tmdb_id": 155,
     "kmdb_id": null,
     "created_at": "2022-12-01T22:25:00+09:00",
-    "updated_at": "2026-08-08T06:56:26.793Z",
+    "updated_at": "2026-08-08T09:25:16.884Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5001,7 +5078,7 @@
     "tmdb_id": 6957,
     "kmdb_id": null,
     "created_at": "2022-12-02T22:16:00+09:00",
-    "updated_at": "2026-08-08T06:56:27.953Z",
+    "updated_at": "2026-08-08T09:25:17.545Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5047,7 +5124,7 @@
     "tmdb_id": 526896,
     "kmdb_id": null,
     "created_at": "2022-12-05T22:31:00+09:00",
-    "updated_at": "2026-08-08T06:56:28.979Z",
+    "updated_at": "2026-08-08T09:25:18.355Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5094,7 +5171,7 @@
     "tmdb_id": 555604,
     "kmdb_id": null,
     "created_at": "2022-12-19T21:21:00+09:00",
-    "updated_at": "2026-08-08T06:56:30.090Z",
+    "updated_at": "2026-08-08T09:25:19.104Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5137,7 +5214,7 @@
     "tmdb_id": 777270,
     "kmdb_id": null,
     "created_at": "2022-12-23T13:39:00+09:00",
-    "updated_at": "2026-08-08T06:56:31.078Z",
+    "updated_at": "2026-08-08T09:25:19.776Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5181,7 +5258,7 @@
     "tmdb_id": 615678,
     "kmdb_id": null,
     "created_at": "2022-12-24T18:19:00+09:00",
-    "updated_at": "2026-08-08T06:56:32.060Z",
+    "updated_at": "2026-08-08T09:25:20.564Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5224,7 +5301,7 @@
     "tmdb_id": 259694,
     "kmdb_id": null,
     "created_at": "2022-12-25T21:45:00+09:00",
-    "updated_at": "2026-08-08T06:56:33.081Z",
+    "updated_at": "2026-08-08T09:25:21.764Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5270,7 +5347,7 @@
     "tmdb_id": 10501,
     "kmdb_id": null,
     "created_at": "2022-12-31T13:36:00+09:00",
-    "updated_at": "2026-08-08T06:56:34.292Z",
+    "updated_at": "2026-08-08T09:25:22.415Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5292,9 +5369,9 @@
     "note": "옥황상제님을 뵙습니다!\n\nIt was good to see young Anthony Wong.",
     "title": "審死官續集 - 濟公",
     "title_notion_original": "審死官續集 - 濟公",
-    "title_original": null,
-    "title_ko": null,
-    "title_local": null,
+    "title_original": "濟公",
+    "title_ko": "심사관 2",
+    "title_local": "濟公",
     "first_line": "参见玉帝!",
     "style": "일상대화형",
     "style_group": "dialogue",
@@ -5308,14 +5385,14 @@
     "tags": [],
     "released": "1993",
     "released_notion_original": "1993",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "1993-07-29",
+    "director": "杜琪峰",
+    "country": "HK",
+    "poster_url": "https://image.tmdb.org/t/p/w500/yBRdbNoH2YAqlPJOZMiGaWN4W3A.jpg",
+    "tmdb_id": 75197,
     "kmdb_id": null,
     "created_at": "2023-01-01T21:36:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:25:23.064Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5323,10 +5400,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": "notion-original",
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": "두기봉",
+    "match_source": "human-override",
+    "match_confirmed": false
   },
   {
     "id": "new-years-eve-2011",
@@ -5355,7 +5437,7 @@
     "tmdb_id": 62838,
     "kmdb_id": null,
     "created_at": "2023-01-01T21:47:00+09:00",
-    "updated_at": "2026-08-08T06:56:35.742Z",
+    "updated_at": "2026-08-08T09:25:24.180Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5377,9 +5459,9 @@
     "note": null,
     "title": "설국열차 SNOWPIERCER",
     "title_notion_original": "설국열차 SNOWPIERCER",
-    "title_original": null,
+    "title_original": "설국열차",
     "title_ko": null,
-    "title_local": null,
+    "title_local": "설국열차",
     "first_line": "Good day. On this day, July 1st, 2014, at this hour, 0600, we are at the very first airport in the world… The topic of so much controversy over the past seven years, has continued development.",
     "style": "방송자료형",
     "style_group": "transmission",
@@ -5395,14 +5477,14 @@
     ],
     "released": "2013",
     "released_notion_original": "2013",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2013-08-01",
+    "director": "Bong Joon Ho",
+    "country": "KR",
+    "poster_url": "https://image.tmdb.org/t/p/w500/jw66dQvYyXkZNA0bJ7nKvua9jDr.jpg",
+    "tmdb_id": 110415,
     "kmdb_id": null,
     "created_at": "2023-01-01T21:57:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:25:24.763Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5410,10 +5492,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": null,
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "justice-league-2019",
@@ -5421,8 +5508,8 @@
     "note": null,
     "title": "JUSTICE LEAGUE",
     "title_notion_original": "JUSTICE LEAGUE ",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Justice League",
+    "title_ko": "저스티스 리그",
     "title_local": null,
     "first_line": "There he is! Shh! Sorry. Superman! Can we ask you some questions?",
     "style": "인터뷰형",
@@ -5436,14 +5523,14 @@
     "tags": [],
     "released": "2019",
     "released_notion_original": "2019",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2017-11-15",
+    "director": "Zack Snyder",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/eifGNCSDuxJeS1loAXil5bIGgvC.jpg",
+    "tmdb_id": 141052,
     "kmdb_id": null,
     "created_at": "2023-01-21T16:34:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:25:25.343Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5451,10 +5538,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": false
   },
   {
     "id": "the-meg-2018",
@@ -5483,7 +5575,7 @@
     "tmdb_id": 345940,
     "kmdb_id": null,
     "created_at": "2023-01-21T16:43:00+09:00",
-    "updated_at": "2026-08-08T06:56:37.563Z",
+    "updated_at": "2026-08-08T09:25:26.404Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5527,7 +5619,7 @@
     "tmdb_id": 9693,
     "kmdb_id": null,
     "created_at": "2023-01-23T22:28:00+09:00",
-    "updated_at": "2026-08-08T06:56:38.523Z",
+    "updated_at": "2026-08-08T09:25:27.085Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5571,7 +5663,7 @@
     "tmdb_id": null,
     "kmdb_id": "F-57308",
     "created_at": "2023-01-28T21:01:00+09:00",
-    "updated_at": "2026-08-08T06:56:38.802Z",
+    "updated_at": "2026-08-08T09:25:27.304Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5615,7 +5707,7 @@
     "tmdb_id": 843794,
     "kmdb_id": null,
     "created_at": "2023-01-31T22:09:00+09:00",
-    "updated_at": "2026-08-08T06:56:39.966Z",
+    "updated_at": "2026-08-08T09:25:28.043Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5659,7 +5751,7 @@
     "tmdb_id": 80274,
     "kmdb_id": null,
     "created_at": "2023-02-05T01:23:00+09:00",
-    "updated_at": "2026-08-08T06:56:40.956Z",
+    "updated_at": "2026-08-08T09:25:29.174Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5705,7 +5797,7 @@
     "tmdb_id": 77338,
     "kmdb_id": null,
     "created_at": "2023-02-06T21:36:00+09:00",
-    "updated_at": "2026-08-08T06:56:42.035Z",
+    "updated_at": "2026-08-08T09:25:29.896Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5749,7 +5841,7 @@
     "tmdb_id": 329,
     "kmdb_id": null,
     "created_at": "2023-02-26T21:58:00+09:00",
-    "updated_at": "2026-08-08T06:56:42.983Z",
+    "updated_at": "2026-08-08T09:25:31.434Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5793,7 +5885,7 @@
     "tmdb_id": 671,
     "kmdb_id": null,
     "created_at": "2023-02-28T23:24:00+09:00",
-    "updated_at": "2026-08-08T06:56:44.322Z",
+    "updated_at": "2026-08-08T09:25:32.245Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5839,7 +5931,7 @@
     "tmdb_id": 278247,
     "kmdb_id": null,
     "created_at": "2023-03-26T08:29:00+09:00",
-    "updated_at": "2026-08-08T06:56:45.376Z",
+    "updated_at": "2026-08-08T09:25:32.955Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5882,7 +5974,7 @@
     "tmdb_id": 300668,
     "kmdb_id": null,
     "created_at": "2023-03-29T12:23:00+09:00",
-    "updated_at": "2026-08-08T06:56:46.382Z",
+    "updated_at": "2026-08-08T09:25:33.744Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5927,7 +6019,7 @@
     "tmdb_id": 515001,
     "kmdb_id": null,
     "created_at": "2023-04-30T23:29:00+09:00",
-    "updated_at": "2026-08-08T06:56:47.307Z",
+    "updated_at": "2026-08-08T09:25:34.894Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5949,8 +6041,8 @@
     "note": null,
     "title": "FOREST GUMP",
     "title_notion_original": "FOREST GUMP",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Forrest Gump",
+    "title_ko": "포레스트 검프",
     "title_local": null,
     "first_line": "Hello. My name is Forest, Forest Gump.",
     "style": "자기소개형",
@@ -5964,14 +6056,14 @@
     "tags": [],
     "released": "1994",
     "released_notion_original": "1994",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "1994-06-23",
+    "director": "Robert Zemeckis",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/Cw4hIUIAmSYfK9QfaUW5igp9La.jpg",
+    "tmdb_id": 13,
     "kmdb_id": null,
     "created_at": "2023-06-04T11:53:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:25:35.475Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -5979,10 +6071,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "three-thousand-years-of-longing-2022",
@@ -6011,7 +6108,7 @@
     "tmdb_id": 556694,
     "kmdb_id": null,
     "created_at": "2023-06-06T11:14:00+09:00",
-    "updated_at": "2026-08-08T06:56:48.550Z",
+    "updated_at": "2026-08-08T09:25:36.275Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6055,7 +6152,7 @@
     "tmdb_id": 420817,
     "kmdb_id": null,
     "created_at": "2023-07-30T12:32:00+09:00",
-    "updated_at": "2026-08-08T06:56:49.704Z",
+    "updated_at": "2026-08-08T09:25:36.935Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6077,8 +6174,8 @@
     "note": "장난 치지마, 시간 없단 말이야, 아이 참.",
     "title": "EVERYTHING EVERYONE ALL AT ONCE",
     "title_notion_original": "EVERYTHING EVERYONE ALL AT ONCE",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "Everything Everywhere All at Once",
+    "title_ko": "에브리씽 에브리웨어 올 앳 원스",
     "title_local": null,
     "first_line": "你不要玩了 沒時間了 哎喲.",
     "style": "일상대화형",
@@ -6093,14 +6190,14 @@
     "tags": [],
     "released": "2022",
     "released_notion_original": "2022",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2022-03-24",
+    "director": "Daniel Scheinert",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/u68AjlvlutfEIcpmbYpKcdi09ut.jpg",
+    "tmdb_id": 545611,
     "kmdb_id": null,
     "created_at": "2023-07-30T15:06:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:25:37.505Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6108,10 +6205,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": "notion-original",
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": "다니엘 쉐이너트",
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "冷静と情熱のあいだ-2001",
@@ -6141,7 +6243,7 @@
     "tmdb_id": 33346,
     "kmdb_id": null,
     "created_at": "2023-07-30T18:31:00+09:00",
-    "updated_at": "2026-08-08T06:56:51.006Z",
+    "updated_at": "2026-08-08T09:25:38.225Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6184,7 +6286,7 @@
     "tmdb_id": 332340,
     "kmdb_id": null,
     "created_at": "2023-08-09T21:21:00+09:00",
-    "updated_at": "2026-08-08T06:56:52.308Z",
+    "updated_at": "2026-08-08T09:25:39.094Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6226,7 +6328,7 @@
     "tmdb_id": 108175,
     "kmdb_id": null,
     "created_at": "2023-08-12T22:37:00+09:00",
-    "updated_at": "2026-08-08T06:56:53.499Z",
+    "updated_at": "2026-08-08T09:25:39.746Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6285,8 +6387,8 @@
     "note": null,
     "title": "THE FIFTH WAVE",
     "title_notion_original": "THE FIFTH WAVE",
-    "title_original": null,
-    "title_ko": null,
+    "title_original": "The 5th Wave",
+    "title_ko": "제5침공",
     "title_local": null,
     "first_line": "Help, please…",
     "style": "일상대화형",
@@ -6302,14 +6404,14 @@
     "tags": [],
     "released": "2016",
     "released_notion_original": "2016",
-    "release_date": null,
-    "director": null,
-    "country": null,
-    "poster_url": null,
-    "tmdb_id": null,
+    "release_date": "2016-01-14",
+    "director": "J Blakeson",
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/ja34BV577dtjWl2S5G1tB93IjYb.jpg",
+    "tmdb_id": 299687,
     "kmdb_id": null,
     "created_at": "2023-09-08T21:30:00+09:00",
-    "updated_at": null,
+    "updated_at": "2026-08-08T09:25:40.455Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6317,10 +6419,15 @@
       "released": "notion-original",
       "title": "notion-original",
       "note": null,
-      "poster_url": null
+      "poster_url": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb"
     },
     "watched_via": null,
-    "edition": null
+    "edition": null,
+    "director_ko": null,
+    "match_source": "human-override",
+    "match_confirmed": true
   },
   {
     "id": "babylon-2023",
@@ -6349,7 +6456,7 @@
     "tmdb_id": 615777,
     "kmdb_id": null,
     "created_at": "2023-10-05T20:12:00+09:00",
-    "updated_at": "2026-08-08T06:56:54.910Z",
+    "updated_at": "2026-08-08T09:25:41.214Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6393,7 +6500,7 @@
     "tmdb_id": 341106,
     "kmdb_id": null,
     "created_at": "2023-10-07T14:54:00+09:00",
-    "updated_at": "2026-08-08T06:56:55.905Z",
+    "updated_at": "2026-08-08T09:25:41.915Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6437,7 +6544,7 @@
     "tmdb_id": 30431,
     "kmdb_id": null,
     "created_at": "2023-10-07T17:05:00+09:00",
-    "updated_at": "2026-08-08T06:56:56.960Z",
+    "updated_at": "2026-08-08T09:25:42.765Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6480,7 +6587,7 @@
     "tmdb_id": 37502,
     "kmdb_id": null,
     "created_at": "2023-11-12T13:44:00+09:00",
-    "updated_at": "2026-08-08T06:56:58.028Z",
+    "updated_at": "2026-08-08T09:25:43.824Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6525,7 +6632,7 @@
     "tmdb_id": 586048,
     "kmdb_id": null,
     "created_at": "2023-11-12T16:04:00+09:00",
-    "updated_at": "2026-08-08T06:56:59.096Z",
+    "updated_at": "2026-08-08T09:25:44.598Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6570,7 +6677,7 @@
     "tmdb_id": 294016,
     "kmdb_id": null,
     "created_at": "2023-11-12T19:59:00+09:00",
-    "updated_at": "2026-08-08T06:57:00.191Z",
+    "updated_at": "2026-08-08T09:25:45.435Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6612,7 +6719,7 @@
     "tmdb_id": 666601,
     "kmdb_id": null,
     "created_at": "2023-11-12T21:35:00+09:00",
-    "updated_at": "2026-08-08T06:57:01.187Z",
+    "updated_at": "2026-08-08T09:25:46.075Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6655,7 +6762,7 @@
     "tmdb_id": 640,
     "kmdb_id": null,
     "created_at": "2024-08-03T22:18:00+09:00",
-    "updated_at": "2026-08-08T06:57:02.178Z",
+    "updated_at": "2026-08-08T09:25:46.895Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6698,7 +6805,7 @@
     "tmdb_id": 406759,
     "kmdb_id": null,
     "created_at": "2024-08-07T12:06:00+09:00",
-    "updated_at": "2026-08-08T06:57:03.242Z",
+    "updated_at": "2026-08-08T09:25:47.694Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6744,7 +6851,7 @@
     "tmdb_id": 72190,
     "kmdb_id": null,
     "created_at": "2024-08-07T14:12:00+09:00",
-    "updated_at": "2026-08-08T06:57:04.863Z",
+    "updated_at": "2026-08-08T09:25:48.425Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6786,7 +6893,7 @@
     "tmdb_id": 489,
     "kmdb_id": null,
     "created_at": "2024-08-25T14:58:00+09:00",
-    "updated_at": "2026-08-08T06:57:06.145Z",
+    "updated_at": "2026-08-08T09:25:49.385Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6829,7 +6936,7 @@
     "tmdb_id": 87827,
     "kmdb_id": null,
     "created_at": "2024-08-25T18:20:00+09:00",
-    "updated_at": "2026-08-08T06:57:07.187Z",
+    "updated_at": "2026-08-08T09:25:50.175Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6910,7 +7017,7 @@
     "tmdb_id": 11297,
     "kmdb_id": null,
     "created_at": "2025-06-08T16:10:00+09:00",
-    "updated_at": "2026-08-08T06:57:08.270Z",
+    "updated_at": "2026-08-08T09:25:50.886Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6955,7 +7062,7 @@
     "tmdb_id": 912649,
     "kmdb_id": null,
     "created_at": "2025-09-25T13:35:00+09:00",
-    "updated_at": "2026-08-08T06:57:09.473Z",
+    "updated_at": "2026-08-08T09:25:51.685Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -6997,7 +7104,7 @@
     "tmdb_id": 508642,
     "kmdb_id": null,
     "created_at": "2025-09-25T15:30:00+09:00",
-    "updated_at": "2026-08-08T06:57:10.527Z",
+    "updated_at": "2026-08-08T09:25:52.805Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -7040,7 +7147,7 @@
     "tmdb_id": null,
     "kmdb_id": "F-33932",
     "created_at": "2025-09-25T15:47:00+09:00",
-    "updated_at": "2026-08-08T06:57:10.830Z",
+    "updated_at": "2026-08-08T09:25:53.044Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -7084,7 +7191,7 @@
     "tmdb_id": null,
     "kmdb_id": "F-34254",
     "created_at": "2025-09-25T19:28:00+09:00",
-    "updated_at": "2026-08-08T06:57:11.125Z",
+    "updated_at": "2026-08-08T09:25:53.265Z",
     "source": {
       "first_line": "human",
       "style": "human",
@@ -7128,7 +7235,7 @@
     "tmdb_id": 1146577,
     "kmdb_id": null,
     "created_at": "2026-02-20T16:10:00+09:00",
-    "updated_at": "2026-08-08T06:57:12.191Z",
+    "updated_at": "2026-08-08T09:25:54.045Z",
     "source": {
       "first_line": "human",
       "style": "human",

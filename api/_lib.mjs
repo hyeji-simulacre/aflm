@@ -30,6 +30,24 @@ const TMDB_BASE = 'https://api.themoviedb.org/3'
 export const TMDB_IMAGE = 'https://image.tmdb.org/t/p'
 
 /**
+ * 일시적인 연결 끊김에 대비해 다시 걸어 본다.
+ * 163편을 잇달아 부르다 보면 중간에 한 번씩 끊기는데, 그때마다 '결과 없음'으로
+ * 기록되면 멀쩡한 짝을 잃는다. 서버가 4xx로 거절한 것은 다시 걸지 않는다.
+ */
+async function fetchRetry(url, init, tries = 3) {
+  let last
+  for (let i = 0; i < tries; i++) {
+    try {
+      const r = await fetch(url, init)
+      if (r.status >= 500 || r.status === 429) { last = new Error(`${r.status}`); }
+      else return r
+    } catch (e) { last = e }
+    await new Promise(r => setTimeout(r, 400 * (i + 1) ** 2))
+  }
+  throw last
+}
+
+/**
  * TMDB 호출. v4 읽기 토큰(eyJ로 시작)과 v3 키를 모두 받는다.
  */
 export async function tmdb(path, params = {}) {
@@ -43,7 +61,7 @@ export async function tmdb(path, params = {}) {
   if (key.startsWith('eyJ')) headers.authorization = `Bearer ${key}`
   else url.searchParams.set('api_key', key)
 
-  const r = await fetch(url, { headers })
+  const r = await fetchRetry(url, { headers })
   if (!r.ok) {
     throw new Error(`TMDB ${r.status} ${r.statusText} (${path})`)
   }
@@ -74,7 +92,7 @@ export async function kmdbSearch(query, listCount = 5) {
 
   let data
   try {
-    const r = await fetch(url)
+    const r = await fetchRetry(url)
     if (!r.ok) return { results: [], note: `KMDb 응답 ${r.status}` }
     data = await r.json()
   } catch (e) {

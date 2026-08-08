@@ -48,6 +48,7 @@ node scripts/serve.mjs              # http://localhost:4321 에서 확인
 | `data/style-groups.json` | 화법 분류 20종, 6군 묶음, 군별 색 |
 | `data/venues.json` | 본 곳 선택지 (영화관, OTT 등) |
 | `data/pages.json` | 소개·원칙 문서의 주소와 이동줄 이름 |
+| `data/match-overrides.json` | 자동 매칭이 못 찾거나 잘못 붙인 건을 사람이 직접 지정 |
 
 ---
 
@@ -75,6 +76,7 @@ scripts/
   migrate.mjs                  CSV + md → movies.json
   verify-migration.mjs         원본 대조 검증
   enrich.mjs                   TMDB·KMDb로 메타데이터 일괄 보강
+  audit-matches.mjs            자동 확정된 짝 가운데 의심스러운 건 찾기
   fetch-fonts.mjs              글꼴 내려받기 (한 번만)
   admin-server.mjs             입력 도구 서버 (로컬 전용)
   serve.mjs                    열람 확인용 서버
@@ -101,6 +103,8 @@ node scripts/enrich.mjs --write   # movies.json에 반영한다
 ```
 
 포스터는 제작국 언어판을 먼저 고르고, 없으면 글자 없는 판을 쓴다. 감독 이름은 원어 표기와 한국어 음차를 함께 가져온다.
+
+자동 매칭이 엉뚱한 영화를 붙일 수 있다. `node scripts/audit-matches.mjs`가 포스터 없음, 개봉연도 차이, TMDB 평가 수 부족 같은 약한 신호를 모아 `data/match-audit.json`에 적는다. 잘못 붙은 건은 `data/match-overrides.json`에 TMDB id를 직접 적으면 다음 실행부터 검색을 건너뛰고 그것을 쓴다.
 
 키는 볼트 `.env`(`00-system/03-config/.env`)의 `TMDB_API_KEY`와 `API_KMDB`를 읽는다. 저장소 `.env`가 있으면 그쪽이 우선한다. 어느 파일도 저장소에 올라가지 않는다.
 
