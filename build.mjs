@@ -61,6 +61,62 @@ function visualLength(text) {
   return n
 }
 
+/**
+ * 카드가 차지할 격자 행 수. 포스터 높이와 첫 대사 길이가 함께 정한다.
+ * 열 수마다 카드 폭이 달라지므로 세 벌을 계산한다.
+ * style.css의 --row(8px), --pad(20px)와 짝을 맞춰야 한다.
+ */
+const ROW = 8
+const PAD = 20
+const COLUMNS = [
+  { key: 's4', viewport: 1440, cols: 4 },
+  { key: 's3', viewport: 1180, cols: 3 },
+  { key: 's2', viewport: 860, cols: 2 },
+]
+const LINE_PX = 15, LINE_H = 1.4      // 포스터 아래 첫 대사
+const BIG_PX = 20, BIG_H = 1.4        // 포스터를 대신하는 첫 대사
+const META_H = 40, GAPS = 24, PADS = PAD * 2
+const TEXT_MIN = 140, TEXT_PAD = 44
+
+/**
+ * 포스터 상자의 세로 비율을 첫 대사 길이로 정한다.
+ * 대사가 길수록 상자가 길어진다. 배치를 꾸미려고 아무렇게나 섞는 것이
+ * 아니라, 기록의 길이가 곧 화면의 리듬이 되게 하는 것이다.
+ * 포스터 자체는 잘라 넣는다(object-fit: cover).
+ */
+export function ratioOf(text) {
+  const len = visualLength(text)
+  if (len <= 22) return 1        // 아주 짧은 대사: 정사각
+  if (len <= 48) return 1.25
+  if (len <= 90) return 1.5      // 포스터 본래 비율 2:3
+  return 1.75                    // 긴 대사: 가장 긴 상자
+}
+
+export function spanOf(text, hasPoster) {
+  const len = Math.max(visualLength(text), 1)
+  const ratio = ratioOf(text)
+  const out = {}
+  for (const { key, viewport, cols } of COLUMNS) {
+    const content = viewport / cols - PADS
+    let h
+    if (hasPoster) {
+      const cpl = Math.max(12, Math.floor(content / (LINE_PX * 0.5)))
+      const lines = Math.max(1, Math.ceil(len / cpl))
+      h = PADS + content * ratio + GAPS + lines * LINE_PX * LINE_H + META_H
+    } else {
+      // 포스터가 없으면 글이 자리를 대신한다. 짧은 대사는 작은 상자로 남는다.
+      const cpl = Math.max(8, Math.floor(content / (BIG_PX * 0.5)))
+      const lines = Math.max(1, Math.ceil(len / cpl))
+      const tile = Math.max(TEXT_MIN, lines * BIG_PX * BIG_H + TEXT_PAD)
+      h = PADS + tile + GAPS + META_H
+    }
+    out[key] = Math.ceil(h / ROW)
+  }
+  return out
+}
+
+const spanStyle = s => `--s4:${s.s4};--s3:${s.s3};--s2:${s.s2}`
+
 /** 포스터 주소. 저장소 안 파일이면 페이지 깊이에 맞춰 앞을 붙인다. */
 function posterSrc(url, depth) {
   if (!url) return null
@@ -208,7 +264,9 @@ function card(m, depth) {
       `${m.style ? ` <span class="s">${esc(m.style)}</span>` : ' <span class="s">분류 없음</span>'}</p>`,
   ].join('\n')
 
-  return `<a class="card" href="${up(depth)}movie/${encodeURIComponent(m.id)}.html" data-group="${g.key}">
+  const span = `${spanStyle(spanOf(shown, Boolean(src)))};--ar:${ratioOf(shown)}`
+
+  return `<a class="card" href="${up(depth)}movie/${encodeURIComponent(m.id)}.html" data-group="${g.key}" style="${span}">
 ${tile}
 <div class="cap">
 ${cap}
@@ -227,7 +285,7 @@ function listPage({ items, title, lead, current, depth = 0, desc, group = null }
   const seed = items.slice(0, SEED)
   const body = `${hero(depth, lead)}
 ${groupbar(depth, current)}
-<main class="grid" id="grid" data-group-filter="${group ?? ''}" data-seed="${seed.length}" data-total="${items.length}">
+<main class="grid" id="grid" data-base="${up(depth)}" data-group-filter="${group ?? ''}" data-seed="${seed.length}" data-total="${items.length}">
 ${seed.map(m => card(m, depth)).join('\n')}
 </main>
 ${items.length > SEED ? `<nav class="pager">
@@ -382,6 +440,8 @@ writeFileSync(join(OUT, 'data', 'movies.json'), JSON.stringify({
     group: groupOf(m).key,
     poster: m.poster_url,
     edition: m.edition ?? null,
+    span: spanOf(m.first_line ?? '첫 대사가 기록되지 않았습니다', Boolean(m.poster_url)),
+    ar: ratioOf(m.first_line ?? '첫 대사가 기록되지 않았습니다'),
   })),
 }), 'utf8')
 // admin.html은 배포본에 넣지 않는다. 입력은 로컬 admin-server에서만 한다.

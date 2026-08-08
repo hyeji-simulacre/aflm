@@ -12,7 +12,8 @@
 
   var seed = Number(grid.dataset.seed || 0)
   var filter = grid.dataset.groupFilter || ''
-  var depth = location.pathname.split('/').filter(Boolean).length > 1 ? '../' : './'
+  // 깊이는 빌드가 적어 준다. 주소로 짐작하면 하위 경로 배포에서 어긋난다.
+  var depth = grid.dataset.base || './'
 
   var STEP = 24
   var items = null
@@ -30,6 +31,12 @@
     a.className = 'card'
     a.href = depth + 'movie/' + encodeURIComponent(m.id) + '.html'
     a.setAttribute('data-group', m.group)
+    if (m.span) {
+      a.style.setProperty('--s4', m.span.s4)
+      a.style.setProperty('--s3', m.span.s3)
+      a.style.setProperty('--s2', m.span.s2)
+    }
+    if (m.ar) a.style.setProperty('--ar', m.ar)
 
     // 저장소 안 포스터는 상대 경로로 들어 있다. 페이지 깊이에 맞춰 앞을 붙인다.
     var poster = m.poster && !/^https?:\/\//.test(m.poster) ? depth + m.poster : m.poster

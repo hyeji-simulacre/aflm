@@ -172,9 +172,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  /* 카드마다 높이가 다르다. 행 수는 빌드가 계산해 --s4/--s3/--s2로 넣는다.
+     계산이 모자라도 글이 잘리지 않도록 행이 늘어날 수 있게 둔다. */
+  grid-auto-rows: minmax(var(--row), auto);
 }
 
 .card {
+  grid-row: span var(--s4);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -185,7 +189,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 
 .card .tile {
   display: block;
-  aspect-ratio: 2 / 3;
+  /* 세로 비율은 첫 대사 길이가 정한다. 빌드가 --ar로 넣어 준다. */
+  aspect-ratio: 1 / var(--ar, 1.5);
   overflow: hidden;
   background: var(--grey1);
   margin-bottom: 14px;
@@ -203,13 +208,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 
 .card:hover .tile img { transform: scale(1.075); }
 
-/* 포스터가 없는 편은 첫 대사가 포스터 자리를 차지한다 */
+/* 포스터가 없는 편은 첫 대사가 그 자리를 대신한다. 2:3에 묶지 않고
+   글 길이만큼만 차지해서, 짧은 대사는 작은 상자로 남는다. */
 .card .tile.text {
+  aspect-ratio: auto;
+  min-height: 140px;
   background: var(--ink);
   color: var(--bg);
-  display: grid;
-  place-items: center;
-  padding: 18px;
+  display: flex;
+  align-items: flex-end;
+  padding: 22px 18px;
   text-align: left;
 }
 
@@ -228,10 +236,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   line-height: 1.4;
   letter-spacing: 0;
   word-break: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .card .line.empty { color: var(--grey2); }
@@ -589,17 +593,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 /* ── 화면 폭에 따른 열 수 ────────────────────────────────────────────── */
 @media (max-width: 1180px) {
   .grid { grid-template-columns: repeat(3, 1fr); }
+  .card { grid-row: span var(--s3); }
 }
 
 @media (max-width: 860px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
+  .card { grid-row: span var(--s2); }
   .detail .film { grid-template-columns: 160px 1fr; gap: 28px; }
 }
 
 /* 모바일. 격자 계산을 끄고 한 열로 쌓는다. */
 @media (max-width: 640px) {
-  .grid { grid-template-columns: 1fr; }
-  .card { border-right: 0; }
+  .grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  .card { grid-row: auto; border-right: 0; }
 
   .hero h1 { font-size: calc(112 * 100vw / var(--size)); }
   .groupbar a { padding: 12px 14px; }
