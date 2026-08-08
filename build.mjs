@@ -421,6 +421,8 @@ writeFileSync(join(OUT, 'style.css'),
   readFileSync(join(root, 'src', 'style.css'), 'utf8'), 'utf8')
 
 copyFileSync(join(root, 'src', 'favicon.svg'), join(OUT, 'favicon.svg'))
+// GitHub Pages에 쓸 도메인. 이 파일이 없으면 사용자 지정 도메인이 풀린다.
+copyFileSync(join(root, 'src', 'CNAME'), join(OUT, 'CNAME'))
 // GitHub Pages의 Jekyll 처리를 끈다. 밑줄로 시작하는 파일이 사라지지 않게.
 writeFileSync(join(OUT, '.nojekyll'), '', 'utf8')
 copyFileSync(join(root, 'data', 'style-groups.json'), join(OUT, 'style-groups.json'))
