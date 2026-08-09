@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>기록 추가 — AFLM</title>
+<title>기록 넣고 고치기 — AFLM</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -12,7 +12,14 @@
 /* 입력 도구에만 쓰는 규칙. 휴대폰 화면을 먼저 맞춘다. */
 .admin { max-width: 640px; margin: 0 auto; padding: 32px var(--pad) 120px; }
 .admin h1 { font-weight: 500; font-size: 28px; letter-spacing: -.02em; margin: 0 0 4px; }
-.admin .sub { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--grey3); margin: 0 0 32px; }
+.admin .sub { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--grey3); margin: 0 0 24px; }
+
+.modes { display: flex; margin-bottom: 26px; border: 1px solid var(--ink); }
+.modes button {
+  flex: 1; width: auto; border: 0; background: transparent; color: var(--ink);
+  padding: 12px 10px; font-size: 13px;
+}
+.modes button[aria-pressed="true"] { background: var(--ink); color: #fff; }
 
 .field { margin-bottom: 22px; }
 .field > label { display: block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--grey3); margin-bottom: 8px; }
@@ -24,6 +31,7 @@ input[type=text], input[type=password], textarea, select {
   padding: 13px 14px; appearance: none;
 }
 textarea { font-size: 19px; line-height: 1.45; min-height: 116px; resize: vertical; }
+textarea.short { font-size: 16px; min-height: 72px; }
 input:focus, textarea:focus, select:focus { outline: 2px solid var(--forest); outline-offset: -1px; border-color: transparent; }
 
 button {
@@ -52,6 +60,7 @@ button[disabled] { opacity: .4; cursor: default; }
 .results .t { font-size: 15px; line-height: 1.35; }
 .results .d { font-size: 11px; color: var(--grey3); margin-top: 5px; letter-spacing: .04em; }
 .results .src { color: var(--forest); }
+.results .gap { color: #8C3328; }
 
 .chosen { border: 1px solid var(--grey1); padding: 16px; display: flex; gap: 14px; background: #fff; }
 .chosen img, .chosen .noimg { width: 62px; height: 93px; object-fit: cover; flex: none; border: 1px solid var(--grey1); }
@@ -74,7 +83,7 @@ optgroup { font-style: normal; }
 </head>
 <body>
 <main class="admin">
-<h1>기록 추가</h1>
+<h1 id="head">기록 넣고 고치기</h1>
 <p class="sub">AFLM</p>
 
 <div id="msg"></div>
@@ -86,11 +95,18 @@ optgroup { font-style: normal; }
     <input type="password" id="pass" autocomplete="current-password" enterkeyhint="go">
   </div>
   <button id="unlock">확인</button>
+  <p class="note">이 기기에 한 번만 넣으면 됩니다. 다음부터는 사이트 우하단 버튼으로 바로 들어옵니다.</p>
 </section>
 
-<!-- 2. 영화 찾기 -->
 <section id="app" class="hide">
-  <div class="field">
+
+  <nav class="modes">
+    <button type="button" id="modeNew" aria-pressed="true">새로 넣기</button>
+    <button type="button" id="modeEdit" aria-pressed="false">고치기</button>
+  </nav>
+
+  <!-- 2-A. 새로 넣기: TMDB·KMDb에서 영화 찾기 -->
+  <div class="field" id="findMovie">
     <label for="q">영화 제목</label>
     <div class="row">
       <input type="text" id="q" placeholder="한국어, 영어, 원어 모두 가능" enterkeyhint="search" autocomplete="off">
@@ -100,13 +116,24 @@ optgroup { font-style: normal; }
     <ul class="results" id="results"></ul>
   </div>
 
+  <!-- 2-B. 고치기: 이미 있는 기록 찾기 -->
+  <div class="field hide" id="findRecord">
+    <label for="rq">기록 찾기</label>
+    <div class="row">
+      <input type="text" id="rq" placeholder="제목 일부" enterkeyhint="search" autocomplete="off">
+      <button id="rgo" class="ghost" style="flex:0 0 76px">찾기</button>
+    </div>
+    <p class="note">비워 두고 찾으면 빠진 값이 있는 기록만 모아 보여줍니다.</p>
+    <ul class="results" id="rresults"></ul>
+  </div>
+
   <div class="field hide" id="chosenWrap">
-    <label>선택한 영화</label>
+    <label id="chosenLabel">선택한 영화</label>
     <div class="chosen" id="chosen"></div>
     <p class="note"><button class="ghost" id="clear" style="width:auto;padding:8px 12px;font-size:12px;margin-top:10px">다시 고르기</button></p>
   </div>
 
-  <!-- 3. 사람이 쓰는 두 가지 -->
+  <!-- 3. 사람이 쓰는 값 -->
   <div class="field">
     <label for="line">첫 대사</label>
     <textarea id="line" placeholder="영화의 첫 대사를 그대로" enterkeyhint="done"></textarea>
@@ -120,7 +147,7 @@ optgroup { font-style: normal; }
   <div class="field">
     <label for="venue">본 곳 (선택)</label>
     <select id="venue"><option value="">고르지 않음</option></select>
-    <p class="note">시청일은 저장한 날짜로 자동 기록됩니다.</p>
+    <p class="note" id="venueNote">시청일은 저장한 날짜로 자동 기록됩니다.</p>
   </div>
 
   <div class="field">
@@ -135,8 +162,13 @@ optgroup { font-style: normal; }
     </select>
   </div>
 
+  <div class="field">
+    <label for="memo">메모 (선택)</label>
+    <textarea id="memo" class="short" placeholder="대사 번역, 감상, 표기 사정 등"></textarea>
+  </div>
+
   <button id="save" disabled>저장</button>
-  <p class="note">저장하면 로컬 데이터에 쓰고 빌드까지 합니다. git push 하면 사이트에 반영됩니다.</p>
+  <p class="note" id="saveNote"></p>
 </section>
 </main>
 
@@ -144,10 +176,19 @@ optgroup { font-style: normal; }
 (function () {
   'use strict'
 
+  // 암호는 이 기기에만 남는다. 서버로는 요청 머리글로만 간다.
+  // sessionStorage가 아니라 localStorage를 쓰는 이유는 휴대폰에서 탭을 닫아도
+  // 다시 묻지 않게 하기 위해서다. 기기를 잃었을 때는 Vercel에서 암호를 바꾸면
+  // 모든 기기가 함께 끊긴다.
   var KEY = 'aflm-key'
+  // 공개 페이지의 버튼이 읽는 표시. 값은 입력 화면의 상대 주소다.
+  var AT = 'aflm-admin-at'
+
   var $ = function (id) { return document.getElementById(id) }
-  var chosenMovie = null
-  var groups = null
+  var mode = 'new'              // 'new' 또는 'edit'
+  var chosenMovie = null        // 새로 넣기에서 고른 TMDB·KMDb 결과
+  var editing = null            // 고치기에서 고른 기록 { record, sha }
+  var catalog = null            // 공개 목록 데이터 (고치기 검색용)
 
   function msg(text, kind) {
     $('msg').innerHTML = text
@@ -155,7 +196,7 @@ optgroup { font-style: normal; }
       : ''
   }
 
-  function key() { return sessionStorage.getItem(KEY) || '' }
+  function key() { return localStorage.getItem(KEY) || '' }
 
   function api(path, opts) {
     opts = opts || {}
@@ -174,9 +215,21 @@ optgroup { font-style: normal; }
       .replace(/"/g, '&quot;')
   }
 
+  /** 목록에 없는 값이 기록에 있으면 임시 항목을 만들어 고른다. 값을 잃지 않게. */
+  function selectValue(sel, value) {
+    if (!value) { sel.value = ''; return }
+    var has = Array.prototype.some.call(sel.options, function (o) { return o.value === value })
+    if (!has) {
+      var o = document.createElement('option')
+      o.value = value
+      o.textContent = value + ' (목록에 없음)'
+      sel.appendChild(o)
+    }
+    sel.value = value
+  }
+
   // ── 분류 목록 채우기 ────────────────────────────────────────────────
   fetch('style-groups.json').then(function (r) { return r.json() }).then(function (g) {
-    groups = g
     var sel = $('style')
     g.groups.forEach(function (grp) {
       var og = document.createElement('optgroup')
@@ -212,20 +265,69 @@ optgroup { font-style: normal; }
   }).catch(function () { /* 목록이 없어도 저장은 된다 */ })
 
   // ── 암호 ────────────────────────────────────────────────────────────
+  function opened() {
+    $('gate').classList.add('hide')
+    $('app').classList.remove('hide')
+    // 공개 페이지가 버튼을 그릴 수 있도록 이 화면의 주소를 남긴다.
+    try {
+      var here = location.pathname.replace(/^.*\//, '') || 'admin.html'
+      localStorage.setItem(AT, here)
+    } catch (e) { /* 저장을 못 해도 이 화면은 그대로 쓴다 */ }
+    setMode('new')
+  }
+
   function unlock() {
     var v = $('pass').value.trim()
     if (!v) return
-    sessionStorage.setItem(KEY, v)
-    $('gate').classList.add('hide')
-    $('app').classList.remove('hide')
+    localStorage.setItem(KEY, v)
     msg('')
+    opened()
     $('q').focus()
   }
   $('unlock').addEventListener('click', unlock)
   $('pass').addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock() })
-  if (key()) { $('gate').classList.add('hide'); $('app').classList.remove('hide') }
+  if (key()) opened()
 
-  // ── 검색 ────────────────────────────────────────────────────────────
+  // ── 모드 전환 ───────────────────────────────────────────────────────
+  function setMode(next) {
+    mode = next
+    var isNew = next === 'new'
+    $('modeNew').setAttribute('aria-pressed', String(isNew))
+    $('modeEdit').setAttribute('aria-pressed', String(!isNew))
+    $('head').textContent = isNew ? '기록 넣기' : '기록 고치기'
+    $('findMovie').classList.toggle('hide', !isNew)
+    $('findRecord').classList.toggle('hide', isNew)
+    $('chosenLabel').textContent = isNew ? '선택한 영화' : '고치는 기록'
+    $('venueNote').textContent = isNew
+      ? '시청일은 저장한 날짜로 자동 기록됩니다.'
+      : '비어 있던 값을 지금 채울 수 있습니다.'
+    $('saveNote').textContent = isNew
+      ? '저장하면 기록이 하나 늘고 사이트가 다시 만들어집니다.'
+      : '보낸 값만 바뀝니다. 손대지 않은 값은 그대로 둡니다.'
+    $('save').textContent = isNew ? '저장' : '고치기'
+    resetForm()
+  }
+
+  function resetForm() {
+    chosenMovie = null
+    editing = null
+    $('chosenWrap').classList.add('hide')
+    $('results').innerHTML = ''
+    $('rresults').innerHTML = ''
+    $('q').value = ''
+    $('rq').value = ''
+    $('line').value = ''
+    $('style').value = ''
+    $('venue').value = ''
+    $('edition').value = ''
+    $('memo').value = ''
+    check()
+  }
+
+  $('modeNew').addEventListener('click', function () { msg(''); setMode('new') })
+  $('modeEdit').addEventListener('click', function () { msg(''); setMode('edit') })
+
+  // ── 새로 넣기: 영화 찾기 ────────────────────────────────────────────
   function search() {
     var q = $('q').value.trim()
     if (!q) return
@@ -253,7 +355,6 @@ optgroup { font-style: normal; }
   $('go').addEventListener('click', search)
   $('q').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); search() } })
 
-  // ── 선택 ────────────────────────────────────────────────────────────
   function choose(r) {
     msg('정보를 가져오는 중', 'info')
     var done = function (meta) {
@@ -269,7 +370,8 @@ optgroup { font-style: normal; }
             title: d.title_original || d.title,
             title_original: d.title_original, title_ko: d.title_ko, title_local: d.title_local,
             year: d.year, release_date: d.release_date, genre: d.genre,
-            director: d.director, country: d.country, poster_url: d.poster_url,
+            director: d.director, director_ko: d.director_ko, country: d.country,
+            poster_url: d.poster_url,
             tmdb_id: d.tmdb_id, kmdb_id: null, source: 'tmdb'
           })
         })
@@ -279,7 +381,7 @@ optgroup { font-style: normal; }
         title: r.title_original || r.title,
         title_original: r.title_original, title_ko: r.title, title_local: null,
         year: r.year, release_date: r.release_date, genre: r.genre,
-        director: r.director, country: r.country, poster_url: r.poster,
+        director: r.director, director_ko: null, country: r.country, poster_url: r.poster,
         tmdb_id: null, kmdb_id: r.id, source: 'kmdb'
       })
     }
@@ -307,48 +409,167 @@ optgroup { font-style: normal; }
 
   $('clear').addEventListener('click', function () {
     chosenMovie = null
+    editing = null
     $('chosenWrap').classList.add('hide')
-    $('q').value = ''
-    $('q').focus()
+    if (mode === 'new') { $('q').value = ''; $('q').focus() }
+    else { $('rq').value = ''; $('rq').focus() }
     check()
   })
 
+  // ── 고치기: 이미 있는 기록 찾기 ─────────────────────────────────────
+  // 목록은 사이트가 이미 내보내는 공개 데이터를 그대로 쓴다. 검색만 하려고
+  // 서버 함수를 하나 더 두지 않는다. 고칠 기록을 고른 뒤에 원본을 받아온다.
+  function loadCatalog() {
+    if (catalog) return Promise.resolve(catalog)
+    return fetch('data/movies.json', { cache: 'no-store' })
+      .then(function (r) { return r.json() })
+      .then(function (d) { catalog = d.items || []; return catalog })
+  }
+
+  /** 빠진 값. 무엇을 채워야 하는지 목록에서 바로 보이게 한다. */
+  function gapsOf(it) {
+    var g = []
+    if (!it.line) g.push('첫 대사')
+    if (!it.style) g.push('화법')
+    return g
+  }
+
+  function searchRecords() {
+    var q = $('rq').value.trim().toLowerCase()
+    msg('찾는 중', 'info')
+    loadCatalog().then(function (items) {
+      var hits = q
+        ? items.filter(function (it) {
+            return String(it.title || '').toLowerCase().indexOf(q) >= 0 ||
+                   String(it.line || '').toLowerCase().indexOf(q) >= 0 ||
+                   String(it.id || '').indexOf(q) >= 0
+          })
+        : items.filter(function (it) { return gapsOf(it).length > 0 })
+
+      if (!hits.length) {
+        msg(q ? '그 제목으로 찾은 기록이 없습니다.' : '빠진 값이 있는 기록이 없습니다.', 'info')
+        $('rresults').innerHTML = ''
+        return
+      }
+      msg('')
+      $('rresults').innerHTML = hits.slice(0, 40).map(function (it, i) {
+        var img = it.poster
+          ? '<img src="' + esc(it.poster) + '" alt="" loading="lazy">'
+          : '<span class="noimg">없음</span>'
+        var gaps = gapsOf(it)
+        var bits = [it.year, it.style].filter(Boolean).map(esc).join(' · ')
+        return '<li><button type="button" data-i="' + i + '">' + img +
+          '<span><span class="t">' + esc(it.title || '(제목 없음)') + '</span>' +
+          '<span class="d">' + bits +
+          (gaps.length ? ' <span class="gap">' + esc(gaps.join(', ')) + ' 없음</span>' : '') +
+          '</span></span></button></li>'
+      }).join('')
+      if (hits.length > 40) {
+        msg(hits.length + '건 가운데 40건만 보여줍니다. 제목을 더 넣어 좁히세요.', 'info')
+      }
+      $('rresults').querySelectorAll('button').forEach(function (b) {
+        b.addEventListener('click', function () { openRecord(hits[+b.dataset.i].id) })
+      })
+    }).catch(function (e) { msg(esc(e.message), 'err') })
+  }
+  $('rgo').addEventListener('click', searchRecords)
+  $('rq').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); searchRecords() } })
+
+  function openRecord(id) {
+    msg('기록을 가져오는 중', 'info')
+    api('/api/record?id=' + encodeURIComponent(id)).then(function (d) {
+      editing = d
+      var m = d.record
+      var img = m.poster_url
+        ? '<img src="' + esc(m.poster_url) + '" alt="">'
+        : '<span class="noimg">포스터<br>없음</span>'
+      $('chosen').innerHTML = img + '<dl>' +
+        '<dd class="name">' + esc(m.title) + '</dd>' +
+        (m.title_ko ? '<dd>' + esc(m.title_ko) + '</dd>' : '') +
+        row('개봉', m.released) + row('감독', m.director) + row('주소', m.id) +
+        '</dl>'
+      $('chosenWrap').classList.remove('hide')
+      $('rresults').innerHTML = ''
+
+      $('line').value = m.first_line || ''
+      selectValue($('style'), m.style || '')
+      selectValue($('venue'), m.watched_via && m.watched_via.name ? m.watched_via.name : '')
+      selectValue($('edition'), m.edition || '')
+      $('memo').value = m.note || ''
+      msg('')
+      check()
+    }).catch(function (e) { msg(esc(e.message), 'err') })
+  }
+
   // ── 저장 ────────────────────────────────────────────────────────────
   function check() {
-    $('save').disabled = !(chosenMovie && $('line').value.trim() && $('style').value)
+    var filled = $('line').value.trim() && $('style').value
+    $('save').disabled = mode === 'new'
+      ? !(chosenMovie && filled)
+      : !(editing && filled)
   }
   $('line').addEventListener('input', check)
   $('style').addEventListener('change', check)
 
-  $('save').addEventListener('click', function () {
-    if (!chosenMovie) return
+  /** 폼에 든 사람 손 값. 두 모드가 같은 모양으로 보낸다. */
+  function humanFields() {
     var opt = $('style').selectedOptions[0]
-    $('save').disabled = true
-    msg('저장하는 중', 'info')
-    api('/api/save', {
+    var venueOpt = $('venue').selectedOptions[0]
+    var name = $('venue').value
+    var kind = venueOpt ? (venueOpt.dataset.kind || null) : null
+
+    // venues.json에 없는 이름은 임시 항목이라 종류를 모른다. 고치는 기록에
+    // 이미 종류가 적혀 있고 이름을 바꾸지 않았다면 그 값을 지킨다.
+    var was = editing && editing.record ? editing.record.watched_via : null
+    if (!kind && was && was.name === name) kind = was.kind || null
+
+    return {
+      first_line: $('line').value.trim(),
+      style: $('style').value,
+      style_group: opt ? (opt.dataset.group || null) : null,
+      watched_via: name ? { kind: kind, name: name } : null,
+      edition: $('edition').value || null,
+      note: $('memo').value.trim() || null
+    }
+  }
+
+  function saveNew() {
+    var body = humanFields()
+    body.title = chosenMovie.title
+    body.meta = chosenMovie
+    return api('/api/save', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        title: chosenMovie.title,
-        first_line: $('line').value.trim(),
-        style: $('style').value,
-        style_group: opt ? opt.dataset.group : null,
-        watched_via: $('venue').value
-          ? { kind: $('venue').selectedOptions[0].dataset.kind || null, name: $('venue').value }
-          : null,
-        edition: $('edition').value || null,
-        meta: chosenMovie
-      })
+      body: JSON.stringify(body)
     }).then(function (d) {
       msg('저장했습니다. 지금 ' + d.total + '편. ' + esc(d.note), 'ok')
-      chosenMovie = null
-      $('chosenWrap').classList.add('hide')
-      $('q').value = ''; $('line').value = ''; $('style').value = ''
-      check()
-    }).catch(function (e) {
-      msg(esc(e.message), 'err')
-      check()
+      resetForm()
     })
+  }
+
+  function saveEdit() {
+    var body = humanFields()
+    body.id = editing.record.id
+    body.sha = editing.sha
+    return api('/api/update', {
+      method: 'PUT',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (d) {
+      msg(d.changed
+        ? '고쳤습니다. ' + esc(d.note)
+        : '바뀐 값이 없어 그대로 두었습니다.', d.changed ? 'ok' : 'info')
+      if (d.changed) resetForm()
+    })
+  }
+
+  $('save').addEventListener('click', function () {
+    if (mode === 'new' && !chosenMovie) return
+    if (mode === 'edit' && !editing) return
+    $('save').disabled = true
+    msg(mode === 'new' ? '저장하는 중' : '고치는 중', 'info')
+    var work = mode === 'new' ? saveNew() : saveEdit()
+    work.catch(function (e) { msg(esc(e.message), 'err') }).then(check)
   })
 })()
 </script>
