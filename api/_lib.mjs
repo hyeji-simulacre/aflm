@@ -17,7 +17,7 @@ function safeEqual(a, b) {
 
 /** 입력 도구 접근 확인. 암호가 맞지 않으면 응답을 보내고 false를 반환한다. */
 export function requireAuth(req, res) {
-  const expected = process.env.ADMIN_PASSPHRASE
+  const expected = envTrimmed('ADMIN_PASSPHRASE')
   if (!expected) {
     res.status(500).json({ error: 'ADMIN_PASSPHRASE가 설정되지 않았습니다.' })
     return false
@@ -35,13 +35,28 @@ export function requireAuth(req, res) {
 
 export const MOVIES_FILE = 'data/movies.json'
 
+/**
+ * 환경변수의 앞뒤 공백을 걷어낸다.
+ *
+ * 값을 붙여넣다 보면 끝에 공백이 하나 딸려 들어간다. GitHub는 조회에서는
+ * 그것을 넘겨 주지만 쓰기에서는 넘기지 않아, 읽기만 되고 저장은 404가 된다.
+ * 원인을 짐작하기 어려운 자리라 값을 쓰기 전에 다듬는다.
+ *
+ * 값을 지어내는 것이 아니라 눈에 보이지 않는 문자를 걷어내는 것뿐이다.
+ * 없는 값은 없는 대로 둔다.
+ */
+function envTrimmed(name) {
+  const v = process.env[name]
+  return typeof v === 'string' ? v.trim() : v
+}
+
 /** GitHub API 호출. 실패하면 상태와 사유를 그대로 담아 던진다. */
 export async function gh(path, init = {}) {
   const r = await fetch(`https://api.github.com${path}`, {
     ...init,
     headers: {
       accept: 'application/vnd.github+json',
-      authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      authorization: `Bearer ${envTrimmed('GITHUB_TOKEN')}`,
       'x-github-api-version': '2022-11-28',
       ...(init.body ? { 'content-type': 'application/json' } : {}),
       ...init.headers,
@@ -54,8 +69,8 @@ export async function gh(path, init = {}) {
 
 /** 저장소의 movies.json을 읽는다. 겹쳐 쓰기를 가려내려고 sha도 함께 돌려준다. */
 export async function readMovies() {
-  const repo = process.env.GITHUB_REPO
-  const branch = process.env.GITHUB_BRANCH || 'main'
+  const repo = envTrimmed('GITHUB_REPO')
+  const branch = envTrimmed('GITHUB_BRANCH') || 'main'
   const current = await gh(
     `/repos/${repo}/contents/${MOVIES_FILE}?ref=${encodeURIComponent(branch)}`)
   const movies = JSON.parse(Buffer.from(current.content, 'base64').toString('utf8'))
@@ -84,7 +99,9 @@ export function writeErrorMessage(e) {
     return '그 사이에 다른 곳에서 저장했습니다. 화면을 새로 고친 뒤 다시 하세요.'
   }
   if (/GitHub 404/.test(m)) {
-    return 'GitHub가 저장을 받지 않았습니다(404). 읽기가 됐다면 토큰에 쓰기 권한이 없는 것입니다. ' +
+    // 2026-08-18: GITHUB_REPO 끝에 공백이 하나 들어가 읽기는 되고 쓰기만 404가 났다.
+    // 공백은 envTrimmed가 걷어내지만, 값 자체가 틀렸을 수도 있으므로 둘 다 알린다.
+    return 'GitHub가 저장을 받지 않았습니다(404). GITHUB_REPO 값이 정확한지, ' +
       'GITHUB_TOKEN이 이 저장소에 Contents: Read and write를 가졌는지 확인하세요.'
   }
   if (/GitHub 401/.test(m)) {
@@ -95,7 +112,7 @@ export function writeErrorMessage(e) {
 
 /** 필요한 환경변수가 없으면 그 사실을 그대로 알린다. 기본값을 지어내지 않는다. */
 export function requireEnv(res, names) {
-  const missing = names.filter(n => !process.env[n])
+  const missing = names.filter(n => !envTrimmed(n))
   if (missing.length) {
     res.status(500).json({ error: `환경변수가 없습니다: ${missing.join(', ')}` })
     return false
@@ -128,7 +145,7 @@ async function fetchRetry(url, init, tries = 3) {
  * TMDB 호출. v4 읽기 토큰(eyJ로 시작)과 v3 키를 모두 받는다.
  */
 export async function tmdb(path, params = {}) {
-  const key = process.env.TMDB_API_KEY
+  const key = envTrimmed('TMDB_API_KEY')
   const url = new URL(TMDB_BASE + path)
   for (const [k, v] of Object.entries(params)) {
     if (v !== undefined && v !== null && v !== '') url.searchParams.set(k, v)
@@ -156,7 +173,7 @@ export function cleanKmdbText(s) {
  * 그 사실을 note에 남긴다. 값을 지어내지 않는다.
  */
 export async function kmdbSearch(query, listCount = 5) {
-  const key = process.env.API_KMDB
+  const key = envTrimmed('API_KMDB')
   if (!key) return { results: [], note: 'API_KMDB 환경변수가 없어 KMDb를 건너뛰었습니다.' }
 
   // HTTPS로 부른다. 키가 쿼리스트링에 실리므로 평문 구간을 만들지 않는다.
