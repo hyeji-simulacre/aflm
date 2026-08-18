@@ -198,15 +198,44 @@ optgroup { font-style: normal; }
 
   function key() { return localStorage.getItem(KEY) || '' }
 
+  /**
+   * 저장해 둔 암호를 지우고 암호 칸으로 되돌린다.
+   * 서버에서 암호를 바꾼 뒤에도 옛 값을 계속 들고 있으면 무엇을 눌러도
+   * 막히기만 하고 이유를 알 수 없다.
+   */
+  function lock(reason) {
+    try {
+      localStorage.removeItem(KEY)
+      localStorage.removeItem(AT)          // 공개 페이지의 버튼도 함께 거둔다
+    } catch (e) { /* 저장소를 못 써도 화면은 되돌린다 */ }
+    $('app').classList.add('hide')
+    $('gate').classList.remove('hide')
+    $('pass').value = ''
+    if (reason) msg(reason, 'err')
+    $('pass').focus()
+  }
+
   function api(path, opts) {
     opts = opts || {}
-    opts.headers = Object.assign({ 'x-aflm-key': key() }, opts.headers || {})
+    var withKey = opts.key || key()
+    opts.headers = Object.assign({ 'x-aflm-key': withKey }, opts.headers || {})
     return fetch(path, opts).then(function (r) {
       return r.json().then(function (b) {
+        if (r.status === 401) {
+          var e = new Error(b.error || '암호가 맞지 않습니다.')
+          e.unauthorized = true
+          throw e
+        }
         if (!r.ok) throw new Error(b.error || ('오류 ' + r.status))
         return b
       })
     })
+  }
+
+  /** 어떤 요청이든 암호에서 막히면 암호 칸으로 되돌린다. */
+  function fail(e) {
+    if (e && e.unauthorized) lock('암호가 맞지 않습니다. 다시 넣어 주세요.')
+    else msg(esc(e.message), 'err')
   }
 
   function esc(s) {
@@ -276,17 +305,33 @@ optgroup { font-style: normal; }
     setMode('new')
   }
 
+  // 암호는 서버에 물어 확인한 뒤에만 저장한다. 틀린 값을 들고 다음 화면으로
+  // 넘어가면 무엇을 눌러도 막히기만 해서 어디가 잘못됐는지 알기 어렵다.
   function unlock() {
     var v = $('pass').value.trim()
     if (!v) return
-    localStorage.setItem(KEY, v)
-    msg('')
-    opened()
-    $('q').focus()
+    $('unlock').disabled = true
+    msg('확인하는 중', 'info')
+    api('/api/auth', { key: v }).then(function () {
+      localStorage.setItem(KEY, v)
+      msg('')
+      opened()
+      $('q').focus()
+    }).catch(function (e) {
+      msg(e.unauthorized ? '암호가 맞지 않습니다.' : esc(e.message), 'err')
+      $('pass').select()
+    }).then(function () { $('unlock').disabled = false })
   }
   $('unlock').addEventListener('click', unlock)
   $('pass').addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock() })
-  if (key()) opened()
+
+  // 이미 저장된 암호도 한 번 확인한다. 서버에서 암호를 바꿨다면 여기서 걸린다.
+  if (key()) {
+    opened()
+    api('/api/auth').catch(function (e) {
+      if (e.unauthorized) lock('암호가 바뀌었습니다. 새 암호를 넣어 주세요.')
+    })
+  }
 
   // ── 모드 전환 ───────────────────────────────────────────────────────
   function setMode(next) {
@@ -350,7 +395,7 @@ optgroup { font-style: normal; }
       $('results').querySelectorAll('button').forEach(function (b) {
         b.addEventListener('click', function () { choose(d.results[+b.dataset.i]) })
       })
-    }).catch(function (e) { msg(esc(e.message), 'err') })
+    }).catch(fail)
   }
   $('go').addEventListener('click', search)
   $('q').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); search() } })
@@ -375,7 +420,7 @@ optgroup { font-style: normal; }
             tmdb_id: d.tmdb_id, kmdb_id: null, source: 'tmdb'
           })
         })
-        .catch(function (e) { msg(esc(e.message), 'err') })
+        .catch(fail)
     } else {
       done({
         title: r.title_original || r.title,
@@ -470,7 +515,7 @@ optgroup { font-style: normal; }
       $('rresults').querySelectorAll('button').forEach(function (b) {
         b.addEventListener('click', function () { openRecord(hits[+b.dataset.i].id) })
       })
-    }).catch(function (e) { msg(esc(e.message), 'err') })
+    }).catch(fail)
   }
   $('rgo').addEventListener('click', searchRecords)
   $('rq').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); searchRecords() } })
@@ -498,7 +543,7 @@ optgroup { font-style: normal; }
       $('memo').value = m.note || ''
       msg('')
       check()
-    }).catch(function (e) { msg(esc(e.message), 'err') })
+    }).catch(fail)
   }
 
   // ── 저장 ────────────────────────────────────────────────────────────
@@ -569,7 +614,7 @@ optgroup { font-style: normal; }
     $('save').disabled = true
     msg(mode === 'new' ? '저장하는 중' : '고치는 중', 'info')
     var work = mode === 'new' ? saveNew() : saveEdit()
-    work.catch(function (e) { msg(esc(e.message), 'err') }).then(check)
+    work.catch(fail).then(check)
   })
 })()
 </script>

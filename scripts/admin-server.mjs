@@ -152,6 +152,10 @@ createServer(async (req, res) => {
   try {
     if (url.pathname === '/api/search') return await adapt(searchHandler, url, req.method, undefined, res)
     if (url.pathname === '/api/detail') return await adapt(detailHandler, url, req.method, undefined, res)
+    // 로컬은 어떤 암호든 통과시킨다. 형식만 유지한다.
+    if (url.pathname === '/api/auth' && req.method === 'GET') {
+      return send(res, 200, { ok: true })
+    }
     if (url.pathname === '/api/record' && req.method === 'GET') {
       return recordLocal(url.searchParams.get('id'), res)
     }
