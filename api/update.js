@@ -10,7 +10,7 @@
 // body: { id, sha, title?, first_line?, style?, style_group?,
 //         watched_via?, edition?, note?, tags? }
 
-import { requireAuth, requireEnv, readMovies, writeMovies } from './_lib.mjs'
+import { requireAuth, requireEnv, readMovies, writeMovies, writeErrorMessage } from './_lib.mjs'
 import { applyEdit } from './_record.mjs'
 
 export default async function handler(req, res) {
@@ -68,11 +68,7 @@ export default async function handler(req, res) {
     })
   } catch (e) {
     const conflict = /GitHub 409/.test(e.message)
-    res.status(conflict ? 409 : 502).json({
-      error: conflict
-        ? '그 사이에 다른 곳에서 저장했습니다. 화면을 새로 고친 뒤 다시 고치세요.'
-        : `고치지 못했습니다: ${e.message}`,
-    })
+    res.status(conflict ? 409 : 502).json({ error: writeErrorMessage(e) })
     return
   }
 

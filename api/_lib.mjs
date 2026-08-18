@@ -71,6 +71,28 @@ export async function writeMovies({ movies, sha, repo, branch, message }) {
   })
 }
 
+/**
+ * 저장 실패를 사람이 고칠 수 있는 말로 바꾼다.
+ *
+ * 읽기는 되는데 쓰기에서만 404가 오는 경우가 있다. GitHub는 권한이 모자랄 때
+ * 403이 아니라 404를 낸다. 저장소가 있다는 사실조차 알리지 않으려는 것이다.
+ * 그래서 'Not Found'만 보면 주소를 잘못 적은 줄로 읽게 된다.
+ */
+export function writeErrorMessage(e) {
+  const m = String(e?.message ?? '')
+  if (/GitHub 409/.test(m)) {
+    return '그 사이에 다른 곳에서 저장했습니다. 화면을 새로 고친 뒤 다시 하세요.'
+  }
+  if (/GitHub 404/.test(m)) {
+    return 'GitHub가 저장을 받지 않았습니다(404). 읽기가 됐다면 토큰에 쓰기 권한이 없는 것입니다. ' +
+      'GITHUB_TOKEN이 이 저장소에 Contents: Read and write를 가졌는지 확인하세요.'
+  }
+  if (/GitHub 401/.test(m)) {
+    return 'GitHub가 토큰을 받지 않았습니다(401). GITHUB_TOKEN 값이 맞는지, 만료되지 않았는지 확인하세요.'
+  }
+  return `저장하지 못했습니다: ${m}`
+}
+
 /** 필요한 환경변수가 없으면 그 사실을 그대로 알린다. 기본값을 지어내지 않는다. */
 export function requireEnv(res, names) {
   const missing = names.filter(n => !process.env[n])

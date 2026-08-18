@@ -9,7 +9,7 @@
 // POST /api/save
 // body: { title, first_line, style, style_group, watched_via, edition, note, tags, meta }
 
-import { requireAuth, requireEnv, readMovies, writeMovies } from './_lib.mjs'
+import { requireAuth, requireEnv, readMovies, writeMovies, writeErrorMessage } from './_lib.mjs'
 import { buildRecord } from './_record.mjs'
 
 export default async function handler(req, res) {
@@ -51,11 +51,7 @@ export default async function handler(req, res) {
   } catch (e) {
     // sha가 어긋나면 그 사이에 다른 곳에서 저장한 것이다. 덮어쓰지 않는다.
     const conflict = /GitHub 409/.test(e.message)
-    res.status(conflict ? 409 : 502).json({
-      error: conflict
-        ? '그 사이에 다른 곳에서 저장했습니다. 화면을 새로 고친 뒤 다시 저장하세요.'
-        : `저장하지 못했습니다: ${e.message}`,
-    })
+    res.status(conflict ? 409 : 502).json({ error: writeErrorMessage(e) })
     return
   }
 
