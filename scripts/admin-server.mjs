@@ -43,6 +43,7 @@ process.env.ADMIN_PASSPHRASE = LOCAL_KEY
 
 const { default: searchHandler } = await import('../api/search.js')
 const { default: detailHandler } = await import('../api/detail.js')
+const { buildRecord, applyEdit } = await import('../api/_record.mjs')
 
 // ── Vercel 핸들러를 node http에 맞추는 어댑터 ───────────────────────────────
 function adapt(handler, url, method, body, res) {
@@ -65,93 +66,76 @@ function adapt(handler, url, method, body, res) {
 }
 
 // ── 로컬 저장. GitHub API 대신 파일에 직접 쓴다 ─────────────────────────────
-function makeSlug(title, year) {
-  const base = String(title ?? '')
-    .toLowerCase()
-    .replace(/['’]/g, '')
-    .replace(/\p{Extended_Pictographic}/gu, ' ')
-    .replace(/[\/\\:*?"<>|#%{}$+`=@!&,.]/g, ' ')
-    .trim().replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
-  if (!base) return null
-  return year ? `${base}-${year}` : base
+// 레코드를 만들고 고치는 규칙은 api/_record.mjs 하나에 있다. 배포 함수도 같은
+// 파일을 쓰므로 로컬로 넣은 기록과 사이트로 넣은 기록의 모양이 같다.
+const FILE = join(root, 'data', 'movies.json')
+
+function send(res, code, body) {
+  res.writeHead(code, { 'content-type': 'application/json; charset=utf-8' })
+  res.end(JSON.stringify(body))
+}
+
+/** 파일에 쓰고 정적 파일을 다시 만든다. */
+function writeAndBuild(movies) {
+  writeFileSync(FILE, JSON.stringify(movies, null, 2) + '\n', 'utf8')
+  execFileSync(process.execPath, [join(root, 'build.mjs')], { stdio: 'inherit' })
 }
 
 function saveLocal(b, res) {
-  const fail = (code, error) => {
-    res.writeHead(code, { 'content-type': 'application/json; charset=utf-8' })
-    res.end(JSON.stringify({ error }))
+  let record
+  try {
+    record = buildRecord(b)
+  } catch (e) {
+    return send(res, e.status ?? 500, { error: e.message })
   }
-  const title = String(b.title ?? '').trim()
-  const firstLine = String(b.first_line ?? '').trim()
-  const style = String(b.style ?? '').trim()
-  const meta = b.meta ?? {}
-  if (!title) return fail(400, '제목이 없습니다.')
-  if (!firstLine) return fail(400, '첫 대사가 없습니다.')
-  if (!style) return fail(400, '화법 분류를 골라야 합니다.')
 
-  const year = meta.year ? String(meta.year).match(/\d{4}/)?.[0] ?? null : null
-  const id = makeSlug(title, year)
-  if (!id) return fail(400, '제목으로 주소를 만들 수 없습니다.')
+  const movies = JSON.parse(readFileSync(FILE, 'utf8'))
+  if (movies.some(m => m.id === record.id)) {
+    return send(res, 409, { error: `이미 있는 기록입니다: ${record.id}` })
+  }
 
-  const file = join(root, 'data', 'movies.json')
-  const movies = JSON.parse(readFileSync(file, 'utf8'))
-  if (movies.some(m => m.id === id)) return fail(409, `이미 있는 기록입니다: ${id}`)
+  movies.push(record)
+  writeAndBuild(movies)
 
-  // 시청 경로. 고르지 않았으면 null. 시청일은 저장 시각(created_at)이 담당한다.
-  const wv = b.watched_via ?? null
-  const watchedVia = wv && wv.name
-    ? { kind: wv.kind ?? null, name: String(wv.name) }
-    : null
-
-  const now = new Date().toISOString()
-  movies.push({
-    id,
-    record_kind: 'movie',
-    note: null,
-    watched_via: watchedVia,
-    edition: typeof b.edition === 'string' && b.edition.trim() ? b.edition.trim() : null,
-    title,
-    title_notion_original: null,     // Notion에서 온 기록이 아니다
-    title_original: meta.title_original ?? null,
-    title_ko: meta.title_ko ?? null,
-    title_local: meta.title_local ?? null,
-    first_line: firstLine,
-    style,
-    style_group: b.style_group ?? null,
-    genre: Array.isArray(meta.genre) ? meta.genre : [],
-    genre_notion_original: null,
-    tags: Array.isArray(b.tags) ? b.tags : [],
-    released: year,
-    released_notion_original: null,
-    release_date: meta.release_date ?? null,
-    director: meta.director ?? null,
-    director_ko: meta.director_ko ?? null,
-    country: meta.country ?? null,
-    poster_url: meta.poster_url ?? null,
-    tmdb_id: meta.tmdb_id ?? null,
-    kmdb_id: meta.kmdb_id ?? null,
-    created_at: now,
-    updated_at: now,
-    source: {
-      first_line: 'human',
-      style: 'human',
-      title: 'human',
-      genre: meta.source ?? null,
-      released: meta.source ?? null,
-      title_ko: meta.title_ko ? (meta.source ?? null) : null,
-      director: meta.director ? (meta.source ?? null) : null,
-      poster_url: meta.poster_url ? (meta.source ?? null) : null,
-    },
-  })
-
-  writeFileSync(file, JSON.stringify(movies, null, 2) + '\n', 'utf8')
-  execFileSync(process.execPath, [join(root, 'build.mjs')], { stdio: 'inherit' })
-
-  res.writeHead(200, { 'content-type': 'application/json; charset=utf-8' })
-  res.end(JSON.stringify({
-    ok: true, id, total: movies.length,
+  send(res, 200, {
+    ok: true, id: record.id, total: movies.length,
     note: '저장하고 빌드까지 끝났습니다. git push 하면 사이트에 반영됩니다.',
-  }))
+  })
+}
+
+/** 기존 기록 한 건을 통째로 낸다. 고치기 화면이 폼을 채울 때 쓴다. */
+function recordLocal(id, res) {
+  if (!id) return send(res, 400, { error: 'id가 없습니다.' })
+  const movies = JSON.parse(readFileSync(FILE, 'utf8'))
+  const record = movies.find(m => m.id === id)
+  if (!record) return send(res, 404, { error: `없는 기록입니다: ${id}` })
+  // 로컬은 파일을 바로 읽으므로 겹쳐 쓰기를 가려낼 sha가 없다. 배포본에서만 쓴다.
+  send(res, 200, { record, sha: null })
+}
+
+function updateLocal(b, res) {
+  const id = String(b.id ?? '').trim()
+  if (!id) return send(res, 400, { error: 'id가 없습니다.' })
+
+  const movies = JSON.parse(readFileSync(FILE, 'utf8'))
+  const at = movies.findIndex(m => m.id === id)
+  if (at < 0) return send(res, 404, { error: `없는 기록입니다: ${id}` })
+
+  let next
+  try {
+    next = applyEdit(movies[at], b)
+  } catch (e) {
+    return send(res, e.status ?? 500, { error: e.message })
+  }
+  if (!next) return send(res, 200, { ok: true, id, changed: false, note: '바뀐 값이 없습니다.' })
+
+  movies[at] = next
+  writeAndBuild(movies)
+
+  send(res, 200, {
+    ok: true, id, changed: true,
+    note: '고치고 빌드까지 끝났습니다. git push 하면 사이트에 반영됩니다.',
+  })
 }
 
 // ── 서버 ────────────────────────────────────────────────────────────────────
@@ -168,10 +152,18 @@ createServer(async (req, res) => {
   try {
     if (url.pathname === '/api/search') return await adapt(searchHandler, url, req.method, undefined, res)
     if (url.pathname === '/api/detail') return await adapt(detailHandler, url, req.method, undefined, res)
+    if (url.pathname === '/api/record' && req.method === 'GET') {
+      return recordLocal(url.searchParams.get('id'), res)
+    }
     if (url.pathname === '/api/save' && req.method === 'POST') {
       let raw = ''
       for await (const chunk of req) raw += chunk
       return saveLocal(JSON.parse(raw || '{}'), res)
+    }
+    if (url.pathname === '/api/update' && req.method === 'PUT') {
+      let raw = ''
+      for await (const chunk of req) raw += chunk
+      return updateLocal(JSON.parse(raw || '{}'), res)
     }
 
     // 입력 화면은 배포본에 없으므로 저장소 루트에서 직접 낸다

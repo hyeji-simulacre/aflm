@@ -1,5 +1,19 @@
-// API 함수 세 개가 함께 쓰는 도구.
+// API 함수들이 함께 쓰는 도구.
 // 이 파일은 이름이 밑줄로 시작하므로 Vercel이 함수로 만들지 않는다.
+
+import { timingSafeEqual } from 'node:crypto'
+
+/**
+ * 두 값이 같은지 견주되, 걸린 시간으로 값을 좁히지 못하게 한다.
+ * 입력 화면이 공개 주소에 있으므로 암호를 한 글자씩 알아내려는 시도를 막아야 한다.
+ * 길이가 다르면 그 자리에서 끝낸다. 길이는 어차피 응답 시간으로 가려지지 않는다.
+ */
+function safeEqual(a, b) {
+  const x = Buffer.from(String(a ?? ''), 'utf8')
+  const y = Buffer.from(String(b ?? ''), 'utf8')
+  if (x.length !== y.length) return false
+  return timingSafeEqual(x, y)
+}
 
 /** 입력 도구 접근 확인. 암호가 맞지 않으면 응답을 보내고 false를 반환한다. */
 export function requireAuth(req, res) {
@@ -8,12 +22,53 @@ export function requireAuth(req, res) {
     res.status(500).json({ error: 'ADMIN_PASSPHRASE가 설정되지 않았습니다.' })
     return false
   }
-  const given = req.headers['x-aflm-key']
-  if (given !== expected) {
+  if (!safeEqual(req.headers['x-aflm-key'], expected)) {
     res.status(401).json({ error: '암호가 맞지 않습니다.' })
     return false
   }
   return true
+}
+
+// ── GitHub Contents API ─────────────────────────────────────────────────────
+// 기록은 저장소 파일 하나(data/movies.json)에 있고, 커밋이 그대로 변경 이력이자
+// 백업이 된다. 별도 데이터베이스를 두지 않는 이유가 이것이다.
+
+export const MOVIES_FILE = 'data/movies.json'
+
+/** GitHub API 호출. 실패하면 상태와 사유를 그대로 담아 던진다. */
+export async function gh(path, init = {}) {
+  const r = await fetch(`https://api.github.com${path}`, {
+    ...init,
+    headers: {
+      accept: 'application/vnd.github+json',
+      authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      'x-github-api-version': '2022-11-28',
+      ...(init.body ? { 'content-type': 'application/json' } : {}),
+      ...init.headers,
+    },
+  })
+  const body = await r.json().catch(() => ({}))
+  if (!r.ok) throw new Error(`GitHub ${r.status}: ${body.message ?? r.statusText}`)
+  return body
+}
+
+/** 저장소의 movies.json을 읽는다. 겹쳐 쓰기를 가려내려고 sha도 함께 돌려준다. */
+export async function readMovies() {
+  const repo = process.env.GITHUB_REPO
+  const branch = process.env.GITHUB_BRANCH || 'main'
+  const current = await gh(
+    `/repos/${repo}/contents/${MOVIES_FILE}?ref=${encodeURIComponent(branch)}`)
+  const movies = JSON.parse(Buffer.from(current.content, 'base64').toString('utf8'))
+  return { movies, sha: current.sha, repo, branch }
+}
+
+/** movies.json을 커밋한다. sha가 어긋나면 GitHub가 409로 거절한다. */
+export async function writeMovies({ movies, sha, repo, branch, message }) {
+  const content = Buffer.from(JSON.stringify(movies, null, 2) + '\n', 'utf8').toString('base64')
+  return gh(`/repos/${repo}/contents/${MOVIES_FILE}`, {
+    method: 'PUT',
+    body: JSON.stringify({ message, content, sha, branch }),
+  })
 }
 
 /** 필요한 환경변수가 없으면 그 사실을 그대로 알린다. 기본값을 지어내지 않는다. */
