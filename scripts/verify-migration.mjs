@@ -38,13 +38,20 @@ const json = JSON.parse(readFileSync(join(root, 'data', 'movies.json'), 'utf8'))
 
 const problems = []
 
-if (csv.length !== json.length) {
-  problems.push(`편수 불일치: 원본 ${csv.length}, movies.json ${json.length}`)
+// Notion에서 옮겨 온 기록과 그 뒤에 새로 넣은 기록을 가른다.
+// 이전분에는 title_notion_original이 있고, 새 기록에는 없다(null).
+// 이 검증이 보는 것은 '이전분이 원본 그대로인가'이지 '전체 편수가 165인가'가
+// 아니다. 새 기록이 늘어난다고 이전이 틀어진 것은 아니다.
+const migrated = json.filter(m => m.title_notion_original !== null)
+const added = json.filter(m => m.title_notion_original === null)
+
+if (csv.length !== migrated.length) {
+  problems.push(`이전분 편수 불일치: 원본 ${csv.length}, 이전분 ${migrated.length}`)
 }
 
-const n = Math.min(csv.length, json.length)
+const n = Math.min(csv.length, migrated.length)
 for (let i = 0; i < n; i++) {
-  const a = csv[i], b = json[i]
+  const a = csv[i], b = migrated[i]
   const row = i + 2
   const where = `${row}행 ${b.title || '(제목 없음)'}`
 
@@ -81,7 +88,7 @@ for (const m of json) {
   ids.set(m.id, m.title)
 }
 
-console.log(`원본 ${csv.length}행, 변환 ${json.length}편 대조.`)
+console.log(`원본 ${csv.length}행, 이전분 ${migrated.length}편 대조. 이전 후 추가 ${added.length}편(대조 대상 아님).`)
 if (problems.length === 0) {
   console.log('불일치 0건.')
   process.exit(0)
