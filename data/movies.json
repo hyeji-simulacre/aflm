@@ -7255,5 +7255,51 @@
       "director": "tmdb"
     },
     "director_ko": null
+  },
+  {
+    "id": "the-odyssey-2026",
+    "record_kind": "movie",
+    "note": "A time of apparent magic라는 시.",
+    "watched_via": {
+      "kind": "theater",
+      "name": "CGV"
+    },
+    "edition": null,
+    "title": "The Odyssey",
+    "title_notion_original": null,
+    "title_original": "The Odyssey",
+    "title_ko": "오디세이",
+    "title_local": null,
+    "first_line": "A face... a fleet... a war... a man... a thought... a trick...",
+    "style": "독백형",
+    "style_group": "monologue",
+    "genre": [
+      "모험",
+      "액션",
+      "판타지"
+    ],
+    "genre_notion_original": null,
+    "tags": [],
+    "released": "2026",
+    "released_notion_original": null,
+    "release_date": "2026-07-15",
+    "director": "Christopher Nolan",
+    "director_ko": null,
+    "country": "GB",
+    "poster_url": "https://image.tmdb.org/t/p/w500/5rhTDKUhPYvpdQIijFIs5VoWsON.jpg",
+    "tmdb_id": 1368337,
+    "kmdb_id": null,
+    "created_at": "2026-08-18T00:59:58.709Z",
+    "updated_at": "2026-08-18T00:59:58.709Z",
+    "source": {
+      "first_line": "human",
+      "style": "human",
+      "title": "human",
+      "genre": "tmdb",
+      "released": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb",
+      "poster_url": "tmdb"
+    }
   }
 ]
