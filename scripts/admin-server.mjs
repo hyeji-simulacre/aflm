@@ -99,7 +99,7 @@ function saveLocal(b, res) {
 
   send(res, 200, {
     ok: true, id: record.id, total: movies.length,
-    note: '저장하고 빌드까지 끝났습니다. git push 하면 사이트에 반영됩니다.',
+    note: '저장되었습니다. git push 하면 사이트에 반영됩니다.',
   })
 }
 
@@ -134,7 +134,7 @@ function updateLocal(b, res) {
 
   send(res, 200, {
     ok: true, id, changed: true,
-    note: '고치고 빌드까지 끝났습니다. git push 하면 사이트에 반영됩니다.',
+    note: '저장되었습니다. git push 하면 사이트에 반영됩니다.',
   })
 }
 

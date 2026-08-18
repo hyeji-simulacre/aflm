@@ -79,6 +79,14 @@ button[disabled] { opacity: .4; cursor: default; }
 .hide { display: none; }
 .note { font-size: 11px; color: var(--grey3); line-height: 1.7; margin-top: 8px; }
 optgroup { font-style: normal; }
+
+/* 저장한 기록 */
+#savedWrap .chosen { border-color: var(--forest); }
+#saved .line { font-size: 14px; line-height: 1.5; margin: 6px 0 8px; }
+#saved .facts { font-size: 11px; color: var(--grey3); line-height: 1.7; }
+#saved .memo { font-size: 11px; color: var(--grey3); line-height: 1.7; margin-top: 6px; }
+.savedlink { display: inline-block; margin-top: 4px; font-size: 12px; color: var(--hunter); }
+.savedlink[aria-disabled="true"] { color: var(--grey2); pointer-events: none; }
 </style>
 </head>
 <body>
@@ -99,6 +107,13 @@ optgroup { font-style: normal; }
 </section>
 
 <section id="app" class="hide">
+
+  <!-- 저장한 결과. 사이트가 다시 만들어지기를 기다리지 않고 여기서 바로 확인한다. -->
+  <div class="field hide" id="savedWrap">
+    <label>저장한 기록</label>
+    <div class="chosen" id="saved"></div>
+    <p class="note" id="savedState"></p>
+  </div>
 
   <nav class="modes">
     <button type="button" id="modeNew" aria-pressed="true">새로 넣기</button>
@@ -369,8 +384,8 @@ optgroup { font-style: normal; }
     check()
   }
 
-  $('modeNew').addEventListener('click', function () { msg(''); setMode('new') })
-  $('modeEdit').addEventListener('click', function () { msg(''); setMode('edit') })
+  $('modeNew').addEventListener('click', function () { msg(''); hideSaved(); setMode('new') })
+  $('modeEdit').addEventListener('click', function () { msg(''); hideSaved(); setMode('edit') })
 
   // ── 새로 넣기: 영화 찾기 ────────────────────────────────────────────
   function search() {
@@ -546,6 +561,73 @@ optgroup { font-style: normal; }
     }).catch(fail)
   }
 
+  // ── 저장한 기록 보여주기 ────────────────────────────────────────────
+  // 사이트는 다시 만들어지기까지 시간이 걸린다. 그동안 무엇이 저장됐는지
+  // 확인할 방법이 없으면 제대로 들어갔는지 알 수 없다. 저장한 값을 그 자리에
+  // 그대로 보여주고, 사이트에 나타나면 링크를 연다.
+  var watchTimer = null
+
+  function showSaved(snap) {
+    if (watchTimer) { clearTimeout(watchTimer); watchTimer = null }
+
+    var img = snap.poster
+      ? '<img src="' + esc(snap.poster) + '" alt="">'
+      : '<span class="noimg">포스터<br>없음</span>'
+    var facts = [snap.year, snap.style, snap.venue, snap.edition]
+      .filter(Boolean).map(esc).join(' · ')
+
+    $('saved').innerHTML = img + '<div>' +
+      '<div class="name">' + esc(snap.title) + '</div>' +
+      '<p class="line">' + esc(snap.line) + '</p>' +
+      '<div class="facts">' + facts + '</div>' +
+      (snap.memo ? '<div class="memo">' + esc(snap.memo) + '</div>' : '') +
+      '<a class="savedlink" id="savedLink" aria-disabled="true" href="movie/' +
+        encodeURIComponent(snap.id) + '.html">사이트에서 보기</a>' +
+      '</div>'
+    $('savedState').textContent = '사이트에 반영되는 중입니다. 이 화면의 내용이 저장된 값입니다.'
+    $('savedWrap').classList.remove('hide')
+    watchLive(snap, 0)
+  }
+
+  /**
+   * 공개 목록 데이터를 다시 받아 저장한 값이 나타났는지 본다.
+   * 나타나면 링크를 연다. 오래 걸려도 저장 자체는 이미 끝났으므로,
+   * 확인이 안 되면 확인되지 않았다고만 적는다. 됐다고 하지 않는다.
+   */
+  function watchLive(snap, tries) {
+    fetch('data/movies.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.json() })
+      .then(function (d) {
+        var hit = null
+        var items = d.items || []
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].id === snap.id) { hit = items[i]; break }
+        }
+        if (hit && hit.line === snap.line && hit.style === snap.style) {
+          var a = $('savedLink')
+          if (a) a.setAttribute('aria-disabled', 'false')
+          $('savedState').textContent = '사이트에 반영됐습니다.'
+          return
+        }
+        if (tries < 45) {                       // 4초 간격, 3분까지 지켜본다
+          watchTimer = setTimeout(function () { watchLive(snap, tries + 1) }, 4000)
+        } else {
+          $('savedState').textContent =
+            '저장은 끝났지만 사이트에 나타난 것을 아직 확인하지 못했습니다. 잠시 뒤 사이트를 새로 고쳐 보세요.'
+        }
+      })
+      .catch(function () {
+        if (tries < 45) {
+          watchTimer = setTimeout(function () { watchLive(snap, tries + 1) }, 4000)
+        }
+      })
+  }
+
+  function hideSaved() {
+    if (watchTimer) { clearTimeout(watchTimer); watchTimer = null }
+    $('savedWrap').classList.add('hide')
+  }
+
   // ── 저장 ────────────────────────────────────────────────────────────
   function check() {
     var filled = $('line').value.trim() && $('style').value
@@ -578,6 +660,21 @@ optgroup { font-style: normal; }
     }
   }
 
+  /** 화면에 보여줄 저장 결과. 서버에 보낸 값과 고른 영화에서 만든다. */
+  function snapshotOf(id, body, meta) {
+    return {
+      id: id,
+      title: meta.title,
+      year: meta.year || null,
+      poster: meta.poster_url || null,
+      line: body.first_line,
+      style: body.style,
+      venue: body.watched_via ? body.watched_via.name : null,
+      edition: body.edition,
+      memo: body.note
+    }
+  }
+
   function saveNew() {
     var body = humanFields()
     body.title = chosenMovie.title
@@ -587,24 +684,35 @@ optgroup { font-style: normal; }
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(body)
     }).then(function (d) {
-      msg('저장했습니다. 지금 ' + d.total + '편. ' + esc(d.note), 'ok')
+      msg('저장되었습니다. 지금 ' + d.total + '편.', 'ok')
+      var snap = snapshotOf(d.id, body, chosenMovie)
       resetForm()
+      catalog = null                 // 고치기 검색이 새 기록을 보도록 다시 받게 한다
+      showSaved(snap)
     })
   }
 
   function saveEdit() {
     var body = humanFields()
-    body.id = editing.record.id
+    var was = editing.record
+    body.id = was.id
     body.sha = editing.sha
     return api('/api/update', {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(body)
     }).then(function (d) {
-      msg(d.changed
-        ? '고쳤습니다. ' + esc(d.note)
-        : '바뀐 값이 없어 그대로 두었습니다.', d.changed ? 'ok' : 'info')
-      if (d.changed) resetForm()
+      if (!d.changed) {
+        msg('바뀐 값이 없어 그대로 두었습니다.', 'info')
+        return
+      }
+      msg('저장되었습니다.', 'ok')
+      var snap = snapshotOf(was.id, body, {
+        title: was.title, year: was.released, poster_url: was.poster_url
+      })
+      resetForm()
+      catalog = null
+      showSaved(snap)
     })
   }
 

@@ -59,6 +59,6 @@ export default async function handler(req, res) {
     ok: true,
     id: record.id,
     total: current.movies.length,
-    note: '사이트를 다시 만들기까지 1분쯤 걸립니다.',
+    note: '저장되었습니다.',
   })
 }
