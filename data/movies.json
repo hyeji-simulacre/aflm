@@ -7301,5 +7301,51 @@
       "director": "tmdb",
       "poster_url": "tmdb"
     }
+  },
+  {
+    "id": "where-the-heart-is-2000",
+    "record_kind": "movie",
+    "note": "유튜브 무료시청",
+    "watched_via": {
+      "kind": "other",
+      "name": "기타"
+    },
+    "edition": null,
+    "title": "Where the Heart Is",
+    "title_notion_original": null,
+    "title_original": "Where the Heart Is",
+    "title_ko": "노블리",
+    "title_local": null,
+    "first_line": "You can actually drive this death trap from Tennessee to California?",
+    "style": "일상대화형",
+    "style_group": "dialogue",
+    "genre": [
+      "코미디",
+      "드라마",
+      "로맨스"
+    ],
+    "genre_notion_original": null,
+    "tags": [],
+    "released": "2000",
+    "released_notion_original": null,
+    "release_date": "2000-04-27",
+    "director": "Matt Williams",
+    "director_ko": null,
+    "country": "US",
+    "poster_url": "https://image.tmdb.org/t/p/w500/3iyT5W3PjDKMKVS1vfAnDLeSXh2.jpg",
+    "tmdb_id": 10564,
+    "kmdb_id": null,
+    "created_at": "2026-08-19T09:37:49.235Z",
+    "updated_at": "2026-08-19T09:37:49.235Z",
+    "source": {
+      "first_line": "human",
+      "style": "human",
+      "title": "human",
+      "genre": "tmdb",
+      "released": "tmdb",
+      "title_ko": "tmdb",
+      "director": "tmdb",
+      "poster_url": "tmdb"
+    }
   }
 ]
