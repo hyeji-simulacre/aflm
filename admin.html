@@ -259,14 +259,22 @@ optgroup { font-style: normal; }
       .replace(/"/g, '&quot;')
   }
 
-  /** 목록에 없는 값이 기록에 있으면 임시 항목을 만들어 고른다. 값을 잃지 않게. */
+  /**
+   * 목록에 없는 값이 기록에 있으면 임시 항목을 만들어 고른다. 값을 잃지 않게.
+   * 앞서 다른 기록 때문에 만든 임시 항목은 걷어낸다. 그대로 두면 고칠 때마다
+   * 남의 기록에서 온 선택지가 쌓인다.
+   */
   function selectValue(sel, value) {
+    Array.prototype.slice.call(sel.querySelectorAll('option[data-temp]'))
+      .forEach(function (o) { o.parentNode.removeChild(o) })
+
     if (!value) { sel.value = ''; return }
     var has = Array.prototype.some.call(sel.options, function (o) { return o.value === value })
     if (!has) {
       var o = document.createElement('option')
       o.value = value
       o.textContent = value + ' (목록에 없음)'
+      o.setAttribute('data-temp', '1')
       sel.appendChild(o)
     }
     sel.value = value
